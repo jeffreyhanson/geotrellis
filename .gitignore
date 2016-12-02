@@ -1,0 +1,18 @@
+# C++ compiled files
+*.o
+*.so
+*.dll
+
+# R profile files
+*.Rproj.user
+*.Rhistory
+
+# system files
+.directory
+
+# temporary files
+*-swp
+
+# java files
+geotrellis/
+geotrellis/

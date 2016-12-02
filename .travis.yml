@@ -1,0 +1,57 @@
+language: r
+dist: trusty
+sudo: true
+  
+r:
+  - release
+  - devel
+
+os:
+  - linux
+
+env:
+  global:
+    - R_LIBS="http://cran.rstudio.com"
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+  
+warnings_are_errors: true
+
+apt_packages:
+  - gdal-bin
+  - libgdal-dev
+  - libgdal1-dev
+  - libproj-dev
+  - libgeos-dev
+  - libgeos-c1
+  - curl
+  - libssh2-1-dev
+  - qpdf
+  - r-cran-rgdal
+  - r-cran-rgeos
+
+r_packages:
+  - covr
+  - rmarkdown
+  - testthat
+
+before_install: 
+  - echo "TRAVIS_OS_NAME = $TRAVIS_OS_NAME"
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-add-repository ppa:webupd8team/java; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo wget http://scala-lang.org/files/archive/scala-2.11.8.deb; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo dpkg -i scala-2.11.8.deb; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install sbt; fi;
+  
+  
+  
+after_success:
+  - Rscript -e 'covr::codecov()'
+ 
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
