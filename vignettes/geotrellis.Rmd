@@ -10,12 +10,7 @@ vignette: >
   %\VignetteIndexEntry{geotrellis}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
----
 
-This is is the real vignette.
-
-```{r}
-plot(1)
-```
+This is a place-holder document for the real vignette. The purpose of this document is so that the vignette can run code that would take too long to run on CRAN.
  
  

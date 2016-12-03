@@ -34,13 +34,8 @@ site: docs readme
 	rm -rf vignettes/*
 	rm -rf inst/doc/*
 
-vignettes: install
-	rm -rf vignettes/*
-	mkdir -p vignettes
-	cd inst/vign;\
-	R --slave -e "devtools::load_all();knitr::knit('geotrellis.Rmd')";\
-	mv inst/vign/geotrellis.md vignettes/geotrellis.Rmd
-	mv -f inst/vign/figures vignettes/
+vignettes:
+	cp -f inst/vign/geotrellis.Rmd vignettes/geotrellis.Rmd
 	R --slave -e "devtools::load_all();devtools::build_vignettes()"
 	rm -rf vignettes/*
 	cp -f inst/vign/placeholder.Rmd vignettes/geotrellis.Rmd
