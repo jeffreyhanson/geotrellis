@@ -2,20 +2,22 @@ Package: geotrellis
 Title: geotrellis: spatial data analysis using geotrellis
 Version: 0.0.0.9000
 Authors@R: c(person(c("Jeffrey", "O"), "Hanson", email='jeffrey.hanson@uqconnect.edu.au', role = c("aut", "cre")))
-Description: Reading, writing, manipulating, and analyzing spatial data using the goetrellis Scala package (<http://geotrellis.io>).
+Description: Reading, writing, manipulating, and analyzing spatial data using
+    the goetrellis Scala package (<http://geotrellis.io>).
 Imports:
-  utils,
-  graphics,
-  grDevices,
-  ids,
-  rscala,
-  assertthat,
-  raster,
-  sp
+    utils,
+    graphics,
+    grDevices,
+    methods,
+    ids,
+    rscala,
+    assertthat,
 Suggests:
-  testthat
+    testthat
 Depends:
-    R(>= 3.1.0)
+    R(>= 3.1.0),
+    raster,
+    sp    
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -24,5 +26,11 @@ BugReports: https://github.com/jeffreyhanson/geotrellis/issues
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 Maintainer: Jeffrey O Hanson <jeffrey.hanson@uqconnect.edu.au>
-SystemRequirements:
-    Scala (>= 2.11)
+SystemRequirements: Java (>= 8)
+Collate:
+    'gt_RasterLayer.R'
+    'gt_RasterLayer-methods.R'
+    'gt_projectRaster.R'
+    'gt_raster.R'
+    'gt_writeRaster.R'
+    'zzz.R'

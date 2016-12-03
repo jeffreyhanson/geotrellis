@@ -14,5 +14,6 @@
 *-swp
 
 # java files
-geotrellis/
-geotrellis/
+inst/java/project/target
+inst/java/project/project
+inst/java/target

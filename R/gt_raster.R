@@ -30,20 +30,22 @@
 gt_raster <- function(x, ...) UseMethod('gt_raster')
 
 #' @rdname gt_raster
+#' 
 #' @export
 gt_raster.character <- function(x, ...) {
   assertthat::assert_that(
     inherits(x, 'character'),
-    assertthat::is_readable(x),
+    assertthat::is.readable(x),
     assertthat::has_extension(x, 'tif'))
   r <- gt_RasterLayer$new()
   r$read_data(x)
+  r
 }
 
 #' @rdname gt_raster
 #' @export
 gt_raster.RasterLayer <- function(x, ...) {
-  path <- tempfile(fileext='.tif', tempdir=file.path(tempdir(), 'geotrellis'))
+  path <- tempfile(fileext='.tif')
   raster::writeRaster(x, path)
   gt_raster.character(path)
 }
@@ -54,11 +56,4 @@ gt_raster.default <- function(x, ...) {
   x <- raster::raster(x, ...)
   assertthat::assert_that(inherits(x, 'RasterLayer'))
   gt_raster.RasterLayer(x)
-}
-
-#' @export
-as.RasterLayer.gt_RasterLayer <- function(x) {
-  path <- tempfile(fileext='.tif')
-  gt_writeRaster(x, path)
-  raster::raster(path)
 }

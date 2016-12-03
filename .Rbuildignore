@@ -9,5 +9,7 @@ cran-comments.md
 ^appveyor\.yml$
 .gitkeep
 ^Makefile$
-^geotrellis*$
+^inst/java/target$
+^inst/java/project/target$
+^inst/java/project/project$
 
