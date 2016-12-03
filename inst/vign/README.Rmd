@@ -13,8 +13,8 @@ output: github_document
 
 This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **It should not be used for any analysis.**
 
-```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.'}
-cat('insert code here\n)
+```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.', echo = FALSE}
+plot(1)
 ```
 
 ## Installation
