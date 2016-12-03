@@ -14,7 +14,7 @@ inst/java/geotrellis.jar: inst/java/geotrellis.sbt inst/java/project/build.prope
 	rm -rf inst/java/project/project
 	rm -rf inst/java/target
 
-docs: install
+docs:
 	R --slave -e "devtools::document()"
 
 install: jar
@@ -24,14 +24,15 @@ readme:
 	cd inst/vign;\
 	R --slave -e "knitr::knit('README.Rmd')";
 	mv -f inst/vign/README.md ./README.md
+	mv -f inst/vign/figure inst/vign/readme-figure
 	sed -i 1,5d README.md
-	sed -i 's|figure|inst/vign/figure|g' README.md
+	sed -i 's|figure|inst/vign/readme-figure|g' README.md
 
-site: document readme
+site: docs readme
 	cp -f inst/vign/geotrellis.Rmd vignettes/geotrellis.Rmd
+	R --slave -e "devtools::load_all();pkgdown::build_site()"
 	rm -rf vignettes/*
 	rm -rf inst/doc/*
-	R --slave -e "devtools::load_all();pkgdown::build_site()"
 
 vignettes: install
 	rm -rf vignettes/*
@@ -55,4 +56,4 @@ check:
 build:
 	R --slave -e "devtools::build()"
 
-.PHONY: clean jar install document readme site vignettes check build
+.PHONY: clean jar install docs readme site vignettes test check build 

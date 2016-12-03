@@ -16,6 +16,6 @@ gt_writeRaster(x, path)
 of producing files on disk.
 }
 \description{
-Save a \code{\link{\gt_RasterLayer}} object to disk in a GeoTIFF format.
+Save a \code{\link{gt_RasterLayer}} object to disk in a GeoTIFF format.
 }
 

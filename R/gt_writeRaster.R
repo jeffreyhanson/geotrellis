@@ -1,6 +1,6 @@
 #' Write geotrellis raster to file
 #'
-#' Save a \code{\link{\gt_RasterLayer}} object to disk in a GeoTIFF format.
+#' Save a \code{\link{gt_RasterLayer}} object to disk in a GeoTIFF format.
 #' @param x \code{\link{gt_RasterLayer}} object.
 #' @param x \code{character} file path.
 #' @return \code{invisible()}. This function is used for its side-effect

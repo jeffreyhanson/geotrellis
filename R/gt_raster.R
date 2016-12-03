@@ -10,10 +10,10 @@
 #' \item{\code{\link[base]{character}} object}{\code{x} is treated as a file path
 #' for raster data loaded directly into the Scala interpreter.}
 #'
-#' \item{\code{\link[raster][Raster]} object}{\code{x} is saved to disk
+#' \item{\code{\link[raster]{RasterLayer}} object}{\code{x} is saved to disk
 #' and loaded into the Scala interpreter.}
 #'
-#' \item{otherwise}{an attempt is made to coerce \code{x} to a \code{\link[raster][Raster]}
+#' \item{otherwise}{an attempt is made to coerce \code{x} to a \code{\link[raster]{RasterLayer}}
 #' object and then it is saved to disk and loaded into the Scala interpreter.} 
 #'
 #' }
