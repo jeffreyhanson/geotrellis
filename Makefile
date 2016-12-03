@@ -21,6 +21,7 @@ install: jar
 	R --slave -e "devtools::install_local('../geotrellis')"
 
 readme:
+	rm -rf inst/vign/readme-figure
 	cd inst/vign;\
 	R --slave -e "knitr::knit('README.Rmd')";
 	mv -f inst/vign/README.md ./README.md
