@@ -4,7 +4,7 @@
 [![Coverage Status](https://codecov.io/github/jeffreyhanson/geotrellis/coverage.svg?branch=master)](https://codecov.io/github/jeffreyhanson/geotrellis?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/geotrellis)](https://CRAN.R-project.org/package=geotrellis)
 
-# Reading, writing, manipulating, and analyzing spatial data using [goetrellis](http://geotrellis.io).
+# Leverage [geotrellis](http://geotrellis.io) to read, write, manipulate, and analyze spatial data from within [R](https://cran.r-project.org).
 
 This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **It should not be used for any analysis.**
 

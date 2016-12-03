@@ -2,8 +2,7 @@ Package: geotrellis
 Title: geotrellis: spatial data analysis using geotrellis
 Version: 0.0.0.9000
 Authors@R: c(person(c("Jeffrey", "O"), "Hanson", email='jeffrey.hanson@uqconnect.edu.au', role = c("aut", "cre")))
-Description: Reading, writing, manipulating, and analyzing spatial data using
-    the goetrellis Scala package (<http://geotrellis.io>).
+Description: Leverage geotrellis (<http://geotrellis.io>) to read, write, manipulate, and analyze spatial data from within R.
 Imports:
     utils,
     graphics,
