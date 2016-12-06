@@ -204,7 +204,7 @@ data source : Scala interpreter\n'))
       r <- replace(r, r == self$no_data_value, NA)
       r
     },
-    compare = function(y, extent, rowcol, res, tolerance, stopiffalse, showwarning) {
+    compare = function(y, extent, rowcol, crs, res, tolerance, stopiffalse, showwarning) {
       # run tests
       r <- TRUE
       if (r && extent)
@@ -214,6 +214,8 @@ data source : Scala interpreter\n'))
                  (abs(self$extent@ymax - y$extent@ymax) <= tolerance)
       if (r && rowcol)
         r <- r && (self$ncol == y$ncol) && (self$nrow == y$nrow)
+      if (r && crs)
+        r <- r && raster::compareCRS(self$crs, y$crs)
       if (r && res)
         r <- r && all(abs(self$res - y$res) <= tolerance)
       # post
@@ -255,8 +257,20 @@ data source : Scala interpreter\n'))
       r$read_metadata()
       r
     }, 
-    mask = function(y, maskvalue) {
-      stop('TODO')
+    mask = function(y, maskvalue, updatevalue) {
+      r <- gt_RasterLayer$new()
+      if (is.na(maskvalue)) maskvalue <- 'NODATA'
+      if (is.na(updatevalue)) updatevalue <- 'NODATA'
+      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
+        'val ',r$id,' = ProjectedRaster(Raster(',self$id,'.tile.localMask(r=',y$id,',',
+                                                                         'readMask=',maskvalue,',',
+                                                                         'writeMask=',updatevalue,'),',
+                                               self$id,'.extent),',
+                                        self$id,'.crs)'
+      ))
+      r$read_metadata()
+      r
+      
     },
     crop = function(extent) {
       stop('TODO')

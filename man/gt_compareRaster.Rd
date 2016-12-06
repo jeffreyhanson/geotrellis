@@ -4,8 +4,8 @@
 \alias{gt_compareRaster}
 \title{Compare geotrellis raster objects}
 \usage{
-gt_compareRaster(x, y, extent = TRUE, rowcol = TRUE, res = TRUE,
-  tolerance = 0.1, stopiffalse = TRUE, showwarning = FALSE)
+gt_compareRaster(x, y, extent = TRUE, rowcol = TRUE, crs = TRUE,
+  res = TRUE, tolerance = 0.1, stopiffalse = TRUE, showwarning = FALSE)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}}.}

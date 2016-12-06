@@ -24,16 +24,17 @@ NULL
 #' except that is is less rigorous.
 #' @return \code{logical} are all tested parameters the same?
 #' @export
-gt_compareRaster <- function(x, y, extent=TRUE, rowcol=TRUE, res=TRUE,
+gt_compareRaster <- function(x, y, extent=TRUE, rowcol=TRUE, crs=TRUE, res=TRUE,
                              tolerance=0.1, stopiffalse=TRUE, showwarning=FALSE) {
   assertthat::assert_that(
     assertthat::is.flag(extent),
     assertthat::is.flag(rowcol),
+    assertthat::is.flag(crs),
     assertthat::is.flag(res),
     assertthat::is.flag(stopiffalse),
     assertthat::is.flag(showwarning),
     assertthat::is.number(tolerance),
     tolerance > 0
   )
-  x$compare(y, extent, rowcol, res, tolerance, stopiffalse, showwarning)
+  x$compare(y, extent, rowcol, crs, res, tolerance, stopiffalse, showwarning)
 }                             

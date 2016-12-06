@@ -52,9 +52,6 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
-</li>
-<li>
   <a href="../news/index.html">News</a>
 </li>
       </ul>
@@ -84,15 +81,11 @@
     <p>Crop returns a geographic subset of an <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object as specified 
 by another <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
 
-    <p>Mask data in a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object using another <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.</p>
-
     <p>Calculate statistics from a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object using
 zones specified in a second <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.</p>
     
 
     <pre><span class='fu'>gt_zonal</span>(<span class='no'>x</span>, <span class='no'>z</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"sd"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>))
-
-<span class='fu'>gt_zonal</span>(<span class='no'>x</span>, <span class='no'>z</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"sd"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>))
 
 <span class='fu'>gt_zonal</span>(<span class='no'>x</span>, <span class='no'>z</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"sd"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>))</pre>
     
@@ -108,18 +101,10 @@ zones specified in a second <code><a href='gt_RasterLayer.html'>gt_RasterLayer</
       <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
       <dt>x</dt>
       <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
-      <dt>mask</dt>
-      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
-      <dt>maskvalue</dt>
-      <dd><code>numeric</code> The value in <code>mask</code> that indicates the cells of <code>x</code>
-that should become missing data values.</dd>
-      <dt>x</dt>
-      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
     <p><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
     <p><code><a href='http://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></code> object with a value for each zone (unique values in)
 <code>z</code>.</p>
@@ -128,8 +113,6 @@ that should become missing data values.</dd>
 
     <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/crop'>crop</a></code>, except that <code>y</code>
 must be a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object and not just any <code><a href='http://www.rdocumentation.org/packages/sp/topics/Spatial-class'>Spatial</a></code> object.</p>
-    <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/mask'>mask</a></code>, except that masked values in <code>x</code>
-are always set to missing data values.</p>
     <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/zonal'>zonal</a></code>. Note that unlike
 <code><a href='http://www.rdocumentation.org/packages/raster/topics/zonal'>zonal</a></code>, the argument to <code>fun</code> cannot be a codefunction
 definition.</p>

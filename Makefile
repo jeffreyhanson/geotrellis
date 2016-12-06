@@ -30,12 +30,14 @@ readme:
 	sed -i 's|figure|inst/vign/readme-figure|g' README.md
 
 site: docs readme
+	mkdir -p vignettes
 	cp -f inst/vign/geotrellis.Rmd vignettes/geotrellis.Rmd
 	R --slave -e "devtools::load_all();pkgdown::build_site()"
 	rm -rf vignettes/*
 	rm -rf inst/doc/*
 
 vignettes:
+	mkdir -p vignettes
 	cp -f inst/vign/geotrellis.Rmd vignettes/geotrellis.Rmd
 	R --slave -e "devtools::load_all();devtools::build_vignettes()"
 	rm -rf vignettes/*

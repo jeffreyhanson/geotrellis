@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • geotrellis</title>
+<title>Mask geotrellis raster data <U+2014> gt_mask <e2><80><a2> geotrellis</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -34,7 +34,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -72,30 +72,55 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>Mask geotrellis raster data</h1>
     </div>
 
-    <div class="contents">
-    <div id="geotrellis-0-0-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#geotrellis-0-0-0-9000" class="anchor"> </a>geotrellis 0.0.0.9000</h1>
-<ul><li>Initial package version</li>
-</ul></div>
-    </div>
+    
+    <p>Mask data in a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object using another <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.</p>
+    
+
+    <pre><span class='fu'>gt_mask</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <dl class="dl-horizontal">
+      <dt>x</dt>
+      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
+      <dt>...</dt>
+      <dd>not used.</dd>
+      <dt>mask</dt>
+      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
+      <dt>maskvalue</dt>
+      <dd><code>numeric</code> The value in <code>mask</code> that indicates the cells of <code>x</code>
+that should become missing data values. Defaults to <code>NA</code>.</dd>
+      <dt>updatevalue</dt>
+      <dd><code>numeric</code> The value that masked out values in <code>x</code> should becomes. 
+Defaults to <code>NA</code>.</dd>
+    </dl>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/mask'>mask</a></code>, except that masked values in <code>x</code>
+are always set to missing data values.</p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#geotrellis-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+          </ul>
+
+  </div>
 </div>
 
       <footer>
