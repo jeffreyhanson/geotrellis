@@ -86,7 +86,7 @@ object to match the extent, resolution, and dimensionality of another
 <code><a href='http://www.rdocumentation.org/packages/raster/topics/projectRaster'>projectRaster</a></code>.</p>
     
 
-    <pre><span class='fu'>gt_resample</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"bilinear"</span>, <span class='st'>"ngb"</span>))</pre>
+    <pre><span class='fu'>gt_resample</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -95,6 +95,8 @@ object to match the extent, resolution, and dimensionality of another
       <dt>y</dt>
       <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object with parameters that <code>x</code>
 should be resampled to.</dd>
+      <dt>...</dt>
+      <dd>not used.</dd>
       <dt>method</dt>
       <dd><code>character</code> method used to compute values for the new <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.
 Either &#39;ngb&#39; (nearest neighbor), which is useful for categorical variables, or &#39;bilinear&#39; 

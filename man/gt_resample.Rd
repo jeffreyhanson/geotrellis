@@ -4,13 +4,15 @@
 \alias{gt_resample}
 \title{Resample geotrellis raster data}
 \usage{
-gt_resample(x, y, method = c("bilinear", "ngb"))
+gt_resample(x, y, ...)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
 
 \item{y}{\code{\link{gt_RasterLayer}} object with parameters that \code{x}
 should be resampled to.}
+
+\item{...}{not used.}
 
 \item{method}{\code{character} method used to compute values for the new \code{\link{gt_RasterLayer}}.
 Either 'ngb' (nearest neighbor), which is useful for categorical variables, or 'bilinear' 

@@ -1,3 +1,6 @@
+#' @include gt_RasterLayer.R
+NULL
+
 #' Resample geotrellis raster data
 #'
 #' This function resamples  a geotrellis raster data \code{\link{gt_RasterLayer}}
@@ -9,14 +12,20 @@
 #' @param method \code{character} method used to compute values for the new \code{\link{gt_RasterLayer}}.
 #' Either 'ngb' (nearest neighbor), which is useful for categorical variables, or 'bilinear' 
 #' (bilinear interpolation; the default value), which is appropriate for continuous variables.
+#' @param ... not used.
 #' @return \code{\code{\link{gt_RasterLayer}} object}.
 #' @details This function is similar to \code{\link[raster]{resample}}.
 #' @export
-gt_resample <- function(x, y, method=c('bilinear', 'ngb')) {
-  assertthat::assert_that(
-    inherits(x, 'gt_RasterLayer'),
-    inherits(y, 'gt_RasterLayer'),
-    raster::compareCRS(crs(x), crs(y)))
-  method <- match.arg(method)
-  x$resample(y, method)
-}
+setGeneric('gt_resample', function(x, y, ...) {standardGeneric('gt_resample')})
+
+#' @export
+setMethod('gt_resample', signature(x='gt_RasterLayer', y='gt_RasterLayer'),
+  function(x, y, method=c('bilinear', 'ngb')) {
+    assertthat::assert_that(
+      inherits(x, 'gt_RasterLayer'),
+      inherits(y, 'gt_RasterLayer'),
+      raster::compareCRS(crs(x), crs(y)),
+      inherits(raster::intersect(raster::extent(x), raster::extent(y)), 'Extent'))
+    method <- match.arg(method)
+    x$resample(y, method)
+})

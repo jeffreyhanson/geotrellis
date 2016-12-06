@@ -246,7 +246,14 @@ data source : Scala interpreter\n'))
       r
     },
     resample = function(y, method) {
-      stop('TODO')
+      r <- gt_RasterLayer$new()
+      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
+        'val ',r$id,' = ProjectedRaster(',self$id,'.raster.resample(method=',.parse.resample.method(method),',',
+                                                   'target=',y$id,'.rasterExtent),',
+                                        self$id,'.crs)'
+      ))
+      r$read_metadata()
+      r
     }, 
     mask = function(y, maskvalue) {
       stop('TODO')
