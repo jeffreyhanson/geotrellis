@@ -6,8 +6,25 @@
 \description{
 This class represents geotrellis raster data objects in R. Note that
 only expert users should attempt to manipulate data using these
-methods directly.
+methods directly. Instead, most users should use the methods provided
+in the package.
 }
+\section{Fields}{
+
+
+\itemize{
+\item{$id}{\code{character} name of object in Scala interpreter.}
+\item{$crs}{\code{\link[sp]{CRS}} coordinate reference system.}
+\item{$extent}{\code{\link[raster]{Extent}} extent of spatial data.}
+\item{$res}{\code{numeric} cell resolution (width and height).}
+\item{$nrow}{\code{integer} number of rows.}
+\item{$ncol}{\code{integer} number of rows.}
+\item{$ncell}{\code{integer} number of cells.}
+\item{$no_data_type}{\code{numeric} value used to represent missing data.}
+\item{$data_type}{\code{character} description of data type.}
+}
+}
+
 \section{Usage}{
 
 
@@ -16,20 +33,32 @@ methods directly.
 r$print()
 
 r$read_data(path)
+r$read_metadata()
 r$write_data(path)
 r$delete_data()
-r$copy_data()
-
 r$values()
-r$extent()
-r$crs()
+r$compare(y)
+
+r$project.to.crs(crs, res, method)
+r$project.to.raster(y, method)
+r$resample(y, method)
+r$mask(y, maskvalue)
+r$crop(extent)
+r$cellStats(stat)
+r$zonal(y, stat)
 }
 
 \section{Arguments}{
 
 
 \describe{
+\item{crs}{\code{\link[sp]{CRS}} coordinate reference system object.}
+\item{maskvalue}{\code{numeric} value in \code{y} to mask out values.}
+\item{method}{\code{character} name of method to use for resampling/reprojection.}
 \item{path}{\code{character} file path for GeoTIFF raster.}
+\item{stat}{\code{character} name of statistic to calculate.}
+\item{res}{\code{numeric} resolution for new data.}
+\item{y}{\code{\link{gt_RasterLayer}} object.}
 }
 }
 
@@ -38,13 +67,25 @@ r$crs()
 
 \code{$new()} create a new raster layer object.
 \code{$finalize()} destroy the object.
+
 \code{$print()} print the object.
-\code{$read_data()} read data to asosciate with the object.
+
+\code{$read_data(path)} read spatial data to asosciate with the object.
+\code{$read_metdata()} load spatial metadata.
 \code{$write_data()} write data to asosciate with the object.
 \code{$delete_data()} delete the data associated with the object.
+
 \code{$values()} values in data associated with the object.
-\code{$extent()} extent of the data associated with the object.
-\code{$crs()} coordinate reference system associated with the object.
+\code{$compare(y)} compare the spatial properties of the object with another object.
+
+\code{$project.to.crs(crs, res, method)} project data to new coordinate system.
+\code{$project.to.raster(y, method)} project data to new coordinate system using
+another object as a template.
+\code{$resample(y, method)} resample a data to match the spatial properties of another object.
+\code{$mask(y, maskvalue)} mask data by another object.
+\code{$crop(extent)} crop data to a specified extent.
+\code{$cellStats(stat)} calculate a statistic based on the data.
+\code{$zonal(y, stat)} calculate summary statistics for each zone.
 }
 \seealso{
 \code{\link{gt_RasterLayer-methods}}.

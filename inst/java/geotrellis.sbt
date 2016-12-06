@@ -4,13 +4,13 @@ version := "1.0.0"
 
 scalaVersion := "2.11.8"
 
-resolvers += Resolver.bintrayRepo("azavea", "geotrellis")
+resolvers += "LocationTech GeoTrellis Releases" at "https://repo.locationtech.org/content/repositories/geotrellis-releases"
 
 libraryDependencies ++= Seq(
-  "com.azavea.geotrellis" %% "geotrellis-spark"  % "0.10.3",
-  "com.azavea.geotrellis" %% "geotrellis-raster" % "0.10.3",
-  "com.azavea.geotrellis" %% "geotrellis-vector" % "0.10.3",
-  "com.azavea.geotrellis" %% "geotrellis-util"   % "0.10.3",
+  "org.locationtech.geotrellis" %% "geotrellis-spark"  % "1.0.0-RC2",
+  "org.locationtech.geotrellis" %% "geotrellis-raster" % "1.0.0-RC2",
+  "org.locationtech.geotrellis" %% "geotrellis-vector" % "1.0.0-RC2",
+  "org.locationtech.geotrellis" %% "geotrellis-util"   % "1.0.0-RC2",
   "org.apache.spark"      %% "spark-core"        % "2.0.1" % "provided",
   "org.scalatest"         %% "scalatest"         % "3.0.0" % "test"
 )

@@ -2,12 +2,15 @@ Package: geotrellis
 Title: geotrellis: spatial data analysis using geotrellis
 Version: 0.0.0.9000
 Authors@R: c(person(c("Jeffrey", "O"), "Hanson", email='jeffrey.hanson@uqconnect.edu.au', role = c("aut", "cre")))
-Description: Leverage geotrellis (<http://geotrellis.io>) to read, write, manipulate, and analyze spatial data from within R.
+Description: Leverage geotrellis (<http://geotrellis.io>) to read, write,
+    manipulate, and analyze spatial data from within R.
 Imports:
     utils,
     graphics,
     grDevices,
     methods,
+    ggplot2,
+    microbenchmark,
     ids,
     rscala,
     assertthat,
@@ -16,7 +19,7 @@ Suggests:
 Depends:
     R(>= 3.1.0),
     raster,
-    sp    
+    sp
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -27,9 +30,17 @@ RoxygenNote: 5.0.1
 Maintainer: Jeffrey O Hanson <jeffrey.hanson@uqconnect.edu.au>
 SystemRequirements: Java (>= 8)
 Collate:
+    'internal.R'
     'gt_RasterLayer.R'
+    'benchmark.R'
     'gt_RasterLayer-methods.R'
+    'gt_cellStats.R'
+    'gt_compareRaster.R'
+    'gt_crop.R'
+    'gt_mask.R'
     'gt_projectRaster.R'
     'gt_raster.R'
+    'gt_resample.R'
     'gt_writeRaster.R'
+    'gt_zonal.R'
     'zzz.R'

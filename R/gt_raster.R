@@ -1,8 +1,12 @@
+#' @include gt_RasterLayer.R
+NULL
+
 #' Create geotrellis raster object
 #'
 #' This function creates a geotrellis raster object (\code{\link{gt_RasterLayer}}).
 #' @param x input object.
-#' @param ... additional arguments passed to \code{\link[raster]{raster}}.
+#' @param ... additional arguments passed to \code{\link[raster]{raster}} if \code{x}
+#' is not \code{character} or \code{RasterLayer}.
 #' @details This function essentially loads \code{x} into geotrellis as
 #' as raster data using the following methods:
 #' \itemize{
@@ -27,33 +31,34 @@
 #' x <- gt_raster(raster(matrix(1:4, ncol=2)))
 #' # create gt_raster object using a file path
 #' x <- gt_raster(system.file("external/test.grd", package="raster"))
-gt_raster <- function(x, ...) UseMethod('gt_raster')
+setGeneric('gt_raster', function(x, ...) {standardGeneric('gt_raster')})
 
-#' @rdname gt_raster
-#' 
 #' @export
-gt_raster.character <- function(x, ...) {
-  assertthat::assert_that(
-    inherits(x, 'character'),
-    assertthat::is.readable(x),
-    assertthat::has_extension(x, 'tif'))
-  r <- gt_RasterLayer$new()
-  r$read_data(x)
-  r
-}
+setMethod('gt_raster', signature(x='character'),
+  function(x, ...) {
+    assertthat::assert_that(
+      inherits(x, 'character'),
+      assertthat::is.readable(x),
+      assertthat::has_extension(x, 'tif'))
+    r <- gt_RasterLayer$new()
+    r$read_data(x)
+    r$read_metadata()
+    r
+  })
 
-#' @rdname gt_raster
 #' @export
-gt_raster.RasterLayer <- function(x, ...) {
-  path <- tempfile(fileext='.tif')
-  raster::writeRaster(x, path)
-  gt_raster.character(path)
-}
+setMethod('gt_raster', signature(x='RasterLayer'),
+  function(x, ...) {
+    path <- tempfile(fileext='.tif')
+    raster::writeRaster(x, path)
+    gt_raster(path)
+  })
 
-#' @rdname gt_raster
 #' @export
-gt_raster.default <- function(x, ...) {
-  x <- raster::raster(x, ...)
-  assertthat::assert_that(inherits(x, 'RasterLayer'))
-  gt_raster.RasterLayer(x)
-}
+setMethod('gt_raster', signature(x='ANY'),
+  function(x, ...) {
+    x <- raster::raster(x, ...)
+    assertthat::assert_that(inherits(x, 'RasterLayer'))
+    gt_raster(x)
+  })
+

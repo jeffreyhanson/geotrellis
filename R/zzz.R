@@ -8,7 +8,9 @@
     import geotrellis.raster._
     import geotrellis.raster.io.geotiff._
     import geotrellis.raster.io.geotiff.reader.GeoTiffReader
+    import geotrellis.raster.io.geotiff.writer.GeoTiffWriter
     import geotrellis.raster.reproject.Reproject
     import geotrellis.raster.resample._
+    type CellType = DataType with NoDataHandling
   '))
 }

@@ -2,23 +2,15 @@
 % Please edit documentation in R/gt_raster.R
 \name{gt_raster}
 \alias{gt_raster}
-\alias{gt_raster.RasterLayer}
-\alias{gt_raster.character}
-\alias{gt_raster.default}
 \title{Create geotrellis raster object}
 \usage{
 gt_raster(x, ...)
-
-\method{gt_raster}{character}(x, ...)
-
-\method{gt_raster}{RasterLayer}(x, ...)
-
-\method{gt_raster}{default}(x, ...)
 }
 \arguments{
 \item{x}{input object.}
 
-\item{...}{additional arguments passed to \code{\link[raster]{raster}}.}
+\item{...}{additional arguments passed to \code{\link[raster]{raster}} if \code{x}
+is not \code{character} or \code{RasterLayer}.}
 }
 \value{
 \code{\link{gt_RasterLayer}} object.

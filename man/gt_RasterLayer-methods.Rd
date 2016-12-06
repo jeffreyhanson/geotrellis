@@ -2,12 +2,15 @@
 % Please edit documentation in R/gt_RasterLayer-methods.R
 \docType{methods}
 \name{gt_RasterLayer-methods}
+\alias{as.matrix,gt_RasterLayer-method}
 \alias{as.raster,gt_RasterLayer-method}
-\alias{as.raster.gt_RasterLayer}
 \alias{crs,gt_RasterLayer-method}
 \alias{extent,gt_RasterLayer-method}
 \alias{gt_RasterLayer-methods}
 \alias{ncell,gt_RasterLayer-method}
+\alias{ncol,gt_RasterLayer-method}
+\alias{nrow,gt_RasterLayer-method}
+\alias{res,gt_RasterLayer-method}
 \alias{values,gt_RasterLayer-method}
 \title{gt_RasterLayer methods}
 \usage{
@@ -15,31 +18,27 @@
 
 \S4method{ncell}{gt_RasterLayer}(x)
 
+\S4method{values}{gt_RasterLayer}(x)
+
+\S4method{res}{gt_RasterLayer}(x)
+
 \S4method{extent}{gt_RasterLayer}(x)
 
-as.raster.gt_RasterLayer(x)
+\S4method{ncol}{gt_RasterLayer}(x)
 
-\S4method{crs}{gt_RasterLayer}(x)
+\S4method{nrow}{gt_RasterLayer}(x)
 
-\S4method{ncell}{gt_RasterLayer}(x)
-
-\S4method{values}{gt_RasterLayer}(x)
+\S4method{as.matrix}{gt_RasterLayer}(x)
 
 \S4method{as.raster}{gt_RasterLayer}(x)
 }
 \arguments{
 \item{x}{\code{gt_RasterLayer} object.}
-
-\item{x}{\code{gt_RasterLayer} object.}
 }
 \description{
 These are convience wrappers for \code{\link{gt_RasterLayer}} objects.
-
-These are convience wrappers for \code{\link{gt_RasterLayer}} objects.
 }
 \seealso{
-\code{\link{gt_RasterLayer}}
-
 \code{\link{gt_RasterLayer}}
 }
 

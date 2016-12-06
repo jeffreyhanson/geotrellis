@@ -42,7 +42,7 @@ vignettes:
 	cp -f inst/vign/placeholder.Rmd vignettes/geotrellis.Rmd
 	touch inst/doc/geotrellis.*
 
-test:
+test: docs
 	R --slave -e "devtools::test()"
 
 check:
