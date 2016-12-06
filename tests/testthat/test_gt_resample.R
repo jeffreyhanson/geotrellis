@@ -7,13 +7,16 @@ test_that('gt_resample (x=gt_RasterLayer, y=gt_RasterLayer)', {
   # send data to Scala interpreter
   g <- gt_raster(rst)
   g2 <- gt_raster(raster::setValues(rst2, 1))
-  # reproject data
+  # resample data
   g2 <- gt_resample(g, g2, method='ngb')
   # tests
   expect_true(raster::compareCRS(rst2@crs, crs(g2)))
   expect_equal(raster::extent(rst2), extent(g2))
   expect_equal(raster::values(rst2), values(g2))
   expect_equal(raster::res(rst2), res(g2))
+  expect_equal(raster::nrow(rst2), nrow(g2))
+  expect_equal(raster::ncol(rst2), ncol(g2))
+  expect_equal(raster::ncell(rst2), ncell(g2))  
 })
 
 test_that('gt_resample (expected errors)', {

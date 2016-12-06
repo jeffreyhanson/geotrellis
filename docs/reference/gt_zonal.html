@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Crop geotrellis raster data <U+2014> gt_zonal <e2><80><a2> geotrellis</title>
+<title>Zonal statistics <U+2014> gt_zonal <e2><80><a2> geotrellis</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -52,6 +52,9 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
+  <a href="../articles/index.html">Articles</a>
+</li>
+<li>
   <a href="../news/index.html">News</a>
 </li>
       </ul>
@@ -74,20 +77,15 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Crop geotrellis raster data</h1>
+    <h1>Zonal statistics</h1>
     </div>
 
     
-    <p>Crop returns a geographic subset of an <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object as specified 
-by another <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
-
     <p>Calculate statistics from a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object using
 zones specified in a second <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.</p>
     
 
-    <pre><span class='fu'>gt_zonal</span>(<span class='no'>x</span>, <span class='no'>z</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"sd"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>))
-
-<span class='fu'>gt_zonal</span>(<span class='no'>x</span>, <span class='no'>z</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"sd"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>))</pre>
+    <pre><span class='fu'>gt_zonal</span>(<span class='no'>x</span>, <span class='no'>z</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"sd"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sum"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -97,22 +95,15 @@ zones specified in a second <code><a href='gt_RasterLayer.html'>gt_RasterLayer</
       <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object with codes representing zones.</dd>
       <dt>fun</dt>
       <dd><code>function</code> to be applied to summarize the values by zone.</dd>
-      <dt>y</dt>
-      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
-      <dt>x</dt>
-      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
     <p><code><a href='http://www.rdocumentation.org/packages/base/topics/matrix'>matrix</a></code> object with a value for each zone (unique values in)
 <code>z</code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/crop'>crop</a></code>, except that <code>y</code>
-must be a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object and not just any <code><a href='http://www.rdocumentation.org/packages/sp/topics/Spatial-class'>Spatial</a></code> object.</p>
     <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/zonal'>zonal</a></code>. Note that unlike
 <code><a href='http://www.rdocumentation.org/packages/raster/topics/zonal'>zonal</a></code>, the argument to <code>fun</code> cannot be a codefunction
 definition.</p>

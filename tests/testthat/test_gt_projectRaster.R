@@ -29,6 +29,9 @@ test_that('gt_projectRaster (x=gt_RasterLayer, y=gt_RasterLayer)', {
   expect_equal(raster::extent(rst2), extent(g3))
   expect_equal(raster::values(rst2), values(g3))
   expect_equal(raster::res(rst2), res(g3))
+  expect_equal(raster::nrow(rst2), nrow(g2))
+  expect_equal(raster::ncol(rst2), ncol(g2))
+  expect_equal(raster::ncell(rst2), ncell(g2))  
 })
 
 test_that('gt_projectRaster (expected errors)', {

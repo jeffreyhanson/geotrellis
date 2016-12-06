@@ -273,8 +273,17 @@ data source : Scala interpreter\n'))
       
     },
     crop = function(extent) {
-      stop('TODO')
-    },
+      r <- gt_RasterLayer$new()
+      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
+        'val ',r$id,' = ProjectedRaster(',self$id,'.raster.crop(Extent(xmin=',extent@xmin,',',
+                                                                      'xmax=',extent@xmax,',',
+                                                                      'ymin=',extent@ymin,',',
+                                                                      'ymax=',extent@ymax,')),',
+                                        self$id,'.crs)'
+      ))
+      r$read_metadata()
+      r
+   },
     
     ### statistics methods
     cellStats = function(stat) {

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create geotrellis raster object <U+2014> gt_raster <e2><80><a2> geotrellis</title>
+<title>Crop geotrellis raster data <U+2014> gt_crop <e2><80><a2> geotrellis</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,22 +77,22 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create geotrellis raster object</h1>
+    <h1>Crop geotrellis raster data</h1>
     </div>
 
     
-    <p>This function creates a geotrellis raster object (<code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>).</p>
+    <p>Crop returns a geographic subset of an <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object as specified 
+by another <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
     
 
-    <pre><span class='fu'>gt_raster</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre><span class='fu'>gt_crop</span>(<span class='no'>x</span>, <span class='no'>y</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>x</dt>
-      <dd>input object.</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed to <code><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></code> if <code>x</code>
-is not <code>character</code> or <code>RasterLayer</code>.</dd>
+      <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
+      <dt>y</dt>
+      <dd><code><a href='http://www.rdocumentation.org/packages/raster/topics/Extent-class'>Extent</a></code> or <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -101,32 +101,10 @@ is not <code>character</code> or <code>RasterLayer</code>.</dd>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function essentially loads <code>x</code> into geotrellis as
-as raster data using the following methods:
-<ul>
-<li><code><a href='http://www.rdocumentation.org/packages/base/topics/character'>character</a></code> object<code>x</code> is treated as a file path
-for raster data loaded directly into the Scala interpreter.</p>
-    <p></li>
-<li><code>RasterLayer</code> object<code>x</code> is saved to disk
-and loaded into the Scala interpreter.</p>
-    <p></li>
-<li>otherwisean attempt is made to coerce <code>x</code> to a <code>RasterLayer</code>
-object and then it is saved to disk and loaded into the Scala interpreter.</p>
-    <p></li>
-</ul></p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p><code><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></code>.</p>
+    <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/crop'>crop</a></code>, except that <code>y</code>
+must be a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object and not just any <code><a href='http://www.rdocumentation.org/packages/sp/topics/Spatial-class'>Spatial</a></code> object.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># create gt_raster object using a matrix</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>gt_raster</span>(<span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>))
-<span class='co'># create gt_raster object using a raster</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>gt_raster</span>(<span class='fu'>raster</span>(<span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>)))
-<span class='co'># create gt_raster object using a file path</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>gt_raster</span>(<span class='fu'>system.file</span>(<span class='st'>"external/test.grd"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"raster"</span>))</div><div class='output co'>#&gt; <span class='error'>Error: File &#39;test.grd&#39; does not have extensiontif</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -136,11 +114,7 @@ object and then it is saved to disk and loaded into the Scala interpreter.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

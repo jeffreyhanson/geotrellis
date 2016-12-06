@@ -15,6 +15,9 @@ test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer)', {
   expect_equal(raster::extent(rst2), extent(g3))
   expect_equal(raster::values(rst2), values(g3))
   expect_equal(raster::res(rst2), res(g3))
+  expect_equal(raster::nrow(rst2), nrow(g3))
+  expect_equal(raster::ncol(rst2), ncol(g3))
+  expect_equal(raster::ncell(rst2), ncell(g3))
 })
 
 test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer, maskvalue, updatevalue)', {
@@ -32,6 +35,9 @@ test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer, maskvalue, updatevalue)'
   expect_equal(raster::extent(rst2), extent(g3))
   expect_equal(raster::values(rst2), values(g3))
   expect_equal(raster::res(rst2), res(g3))
+  expect_equal(raster::nrow(rst2), nrow(g3))
+  expect_equal(raster::ncol(rst2), ncol(g3))
+  expect_equal(raster::ncell(rst2), ncell(g3))
 })
 
 test_that('gt_mask (expected errors)', {
