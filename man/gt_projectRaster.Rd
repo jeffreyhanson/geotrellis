@@ -4,21 +4,25 @@
 \alias{gt_projectRaster}
 \title{Project geotrellis raster to a new coordinate system}
 \usage{
-gt_projectRaster(from, to, ...)
+gt_projectRaster(from, to, res, method)
 }
 \arguments{
 \item{from}{\code{\link{gt_RasterLayer}} object.}
 
+\item{to}{A \code{\link{gt_RasterLayer}} or \code{\link[sp]{CRS}} object with to reproject 
+\code{from} to.}
+
 \item{...}{additional arguments.}
 
-\item{crs}{\code{\link[sp]{crs}} new coordinate system to project data to.}
+\item{res}{\code{numeric} resolution to reproject the data to. This is required when \code{to}
+is a \code{\link[sp]{CRS}} object.}
 
 \item{method}{\code{character} method used to compute values for the new \code{\link{gt_RasterLayer}}.
 Either 'ngb' (nearest neighbor), which is useful for categorical variables, or 'bilinear' 
 (bilinear interpolation; the default value), which is appropriate for continuous variables.}
 }
 \value{
-\code{\code{\link{gt_RasterLayer}} object}.
+\code{\link{gt_RasterLayer}} object.
 }
 \description{
 This function reprojects a geotrellis raster data \code{\link{gt_RasterLayer}}
@@ -31,9 +35,11 @@ a project \code{\link{gt_RasterLayer}} and ensure that the returned raster has a
 extent and dimensionality.
 }
 \examples{
+\dontrun{
 g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
 result <- gt_projectRaster(g, sp::CRS('+init=epsg:3395'), res=50000, method='ngb')
+}
 }
 

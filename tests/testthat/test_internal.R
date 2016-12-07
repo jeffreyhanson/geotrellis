@@ -15,4 +15,3 @@ test_that('.parse.CRS', {
   expect_error(.parse.CRS(CRS('+init=esri:37206')))
   expect_error(.parse.CRS('+init=epsg:4326'))
 })
-

@@ -4,12 +4,10 @@
 \alias{gt_cellStats}
 \title{Statistics across cells}
 \usage{
-gt_cellStats(x, ...)
+gt_cellStats(x)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
-
-\item{...}{not used.}
 }
 \value{
 \code{numeric} object.
@@ -23,9 +21,11 @@ standard deviation, minimum, and maximum of the values in a raster. This functio
 is similar to \code{\link[raster]{cellStats}}.
 }
 \examples{
+\dontrun{
 g <- gt_raster(raster::raster(matrix(c(1:6), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
 gt_cellStats(g)
+}
 }
 

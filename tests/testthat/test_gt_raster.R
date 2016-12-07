@@ -1,6 +1,8 @@
 context('gt_raster')
 
 test_that('gt_raster (x=character)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'))
   input.path <- tempfile(fileext='.tif')
@@ -16,6 +18,8 @@ test_that('gt_raster (x=character)', {
 })
 
 test_that('gt_raster (x=RasterLayer)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'))
   # send data to Scala interpreter
@@ -28,6 +32,8 @@ test_that('gt_raster (x=RasterLayer)', {
 })
 
 test_that('gt_raster (x=ANY)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   mtx <- matrix(1:9, ncol=3)
   # send data to Scala interpreter
@@ -39,6 +45,8 @@ test_that('gt_raster (x=ANY)', {
 })
 
 test_that('gt_RasterLayer (methods)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(NA,1:5), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   # send data to Scala interpreter

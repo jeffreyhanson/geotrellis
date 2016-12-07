@@ -13,9 +13,15 @@ output: github_document
 
 This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **It should not be used for any analysis.**
 
-```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.', echo = FALSE, message=FALSE, results='hide'}
+```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.', echo = FALSE, message=FALSE, results='hide', fig.width=8, fig.height=4}
 devtools::load_all()
-plot(benchmark())
+p <- plot(benchmark(ncell=c(16, 25), times=3L)) +
+  ggplot2::theme(axis.title.x=ggplot2::element_text(size=12),
+        axis.title.y=ggplot2::element_text(size=12),
+        strip.text=ggplot2::element_text(size=15, color='white'),
+        strip.background=ggplot2::element_rect(color='grey80', fill='grey20'),
+        legend.position='bottom')
+print(p)
 ```
 
 ## Installation

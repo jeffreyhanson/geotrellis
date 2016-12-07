@@ -1,6 +1,8 @@
 context('gt_crop')
 
 test_that('gt_crop (x=gt_RasterLayer, y=Extent)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(1:6), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   ext <- raster::extent(c(0, 3, 2, 6))
@@ -21,6 +23,8 @@ test_that('gt_crop (x=gt_RasterLayer, y=Extent)', {
 })
 
 test_that('gt_crop (x=gt_RasterLayer, y=gt_RasterLayer)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(1:6), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   rst2 <- raster::raster(matrix(1, ncol=3), xmn=0, xmx=3, ymn=2, ymx=6)
@@ -41,6 +45,8 @@ test_that('gt_crop (x=gt_RasterLayer, y=gt_RasterLayer)', {
 })
 
 test_that('gt_crop (expected errors)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=1, xmx=3, ymn=2, ymx=8)
   rst2 <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=10, xmx=30, ymn=20, ymx=80)

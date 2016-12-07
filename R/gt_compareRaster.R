@@ -12,6 +12,8 @@ NULL
 #' Defaults to \code{TRUE}.
 #' @param rowcol \code{logical} should the objects' dimensionality be compared?
 #' Defaults to \code{TRUE}.
+#' @param crs \code{logical} should the objects' coordinate refernece systems
+#' be compared?
 #' @param res \code{logical} should the objects' resolution be compared? 
 #' Defaults to \code{TRUE}.
 #' @param tolerance \code{numeric} This sets the difference between values
@@ -24,6 +26,7 @@ NULL
 #' except that is is less rigorous.
 #' @return \code{logical} are all tested parameters the same?
 #' @examples
+#' \dontrun{
 #' g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
 #'                               crs=sp::CRS('+init=epsg:4326'),
 #'                               xmn=0, xmx=3, ymn=2, ymx=10))
@@ -36,6 +39,7 @@ NULL
 #' gt_compareRaster(g, g) # same properties
 #' gt_compareRaster(g, g2, stopiffalse=FALSE) # different crs
 #' gt_compareRaster(g, g2, stopiffalse=FALSE) # different extent
+#' }
 #' @export
 gt_compareRaster <- function(x, y, extent=TRUE, rowcol=TRUE, crs=TRUE, res=TRUE,
                              tolerance=0.1, stopiffalse=TRUE, showwarning=FALSE) {

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>gt_RasterLayer methods <U+2014> gt_RasterLayer-methods <e2><80><a2> geotrellis</title>
+<title>Plot <U+2014> plot.gt_Benchmark <e2><80><a2> geotrellis</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,76 +77,34 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>gt_RasterLayer methods</h1>
+    <h1>Plot</h1>
     </div>
 
     
-    <p>These are convience wrappers for <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> objects.</p>
+    <p>This function plots an object.</p>
     
 
-    <pre><span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>crs</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>ncell</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>values</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>res</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>extent</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>ncol</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>nrow</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>as.matrix</span>(<span class='no'>x</span>)
-
-<span class='co'># S4 method for gt_RasterLayer</span>
-<span class='fu'>as.raster</span>(<span class='no'>x</span>)</pre>
+    <pre><span class='fu'>plot.gt_Benchmark</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>x</dt>
-      <dd><code>gt_RasterLayer</code> object.</dd>
+      <dd>input object.</dd>
     </dl>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code></p>
+    <p><code>ggplot2{ggplot2}</code> object.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># g &lt;- gt_raster(raster::raster(matrix(runif(9), ncol=3),</span>
-<span class='co'>#                               crs=sp::CRS('+init=epsg:4326'),</span>
-<span class='co'>#                               xmn=0, xmx=3, ymn=2, ymx=10))</span>
-<span class='co'># ncell(g) # number of cells</span>
-<span class='co'># ncol(g) # number of columns</span>
-<span class='co'># nrow(g) # number of rows</span>
-<span class='co'># nrow(g) # number of rows</span>
-<span class='co'># crs(g) # coordinate reference system</span>
-<span class='co'># res(g) # cell resolution</span>
-<span class='co'># extent(g) # spatial extent</span>
-<span class='co'># as.matrix(g) # coerce data to matrix object</span>
-<span class='co'># as.raster(g) # coerce data to matrix object</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

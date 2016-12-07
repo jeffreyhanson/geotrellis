@@ -4,7 +4,7 @@
 \alias{gt_resample}
 \title{Resample geotrellis raster data}
 \usage{
-gt_resample(x, y, ...)
+gt_resample(x, y, method)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
@@ -19,7 +19,7 @@ Either 'ngb' (nearest neighbor), which is useful for categorical variables, or '
 (bilinear interpolation; the default value), which is appropriate for continuous variables.}
 }
 \value{
-\code{\code{\link{gt_RasterLayer}} object}.
+\code{\link{gt_RasterLayer}} object.
 }
 \description{
 This function resamples  a geotrellis raster data \code{\link{gt_RasterLayer}}
@@ -30,6 +30,7 @@ object to match the extent, resolution, and dimensionality of another
 This function is similar to \code{\link[raster]{resample}}.
 }
 \examples{
+\dontrun{
 g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
@@ -37,5 +38,6 @@ template <- gt_raster(raster::raster(matrix(runif(4), ncol=2),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
 result <- gt_resample(g, template, method='bilinear')
+}
 }
 

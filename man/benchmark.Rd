@@ -4,12 +4,19 @@
 \alias{benchmark}
 \title{Benchmark geotrellis  functions}
 \usage{
-benchmark(ncell = c(100, 1000, 10000), times = 100L)
+benchmark(ncell = c(100, 2500, 1e+06), times = 100L, io = TRUE,
+  gp = TRUE, stats = TRUE)
 }
 \arguments{
 \item{ncell}{\code{integer} number of cells in data to use for bencmarking.}
 
 \item{times}{\code{integer} number of replicate runs.}
+
+\item{io}{\code{logical} should input/output functions be benchmarked?}
+
+\item{gp}{\code{logical} should geoprocessing functions be benchmarked?}
+
+\item{stats}{\code{logical} should statistical functions be benchmarked?}
 }
 \value{
 \code{gt_Benchmark} object.
@@ -22,7 +29,16 @@ This benchmarks functions in this package that leverage geotrellis
 This function returns a \code{gt_Benchmark} object. This is basically
 a list of \code{\link[microbenchmark]{microbenchmark}} objects.
 }
-\seealso{
-\code{\link{print.gt_Benchmark}}, \code{\link{plot.gt_Benchmark}}.
+\examples{
+\dontrun{
+# run short benchmark
+# note that real benchmarks should use more replications
+# and that geotrellis is better for bigger data sets
+b <- benchmark(c(100, 2500), times = 10L)
+# print results
+b
+# plot results
+plot(b)
+}
 }
 

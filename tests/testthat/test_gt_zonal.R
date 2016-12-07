@@ -1,6 +1,8 @@
 context('gt_zonal')
 
 test_that('gt_zonal (x=gt_RasterLayer, y=gt_RasterLayer)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(seq_len(81), ncol=9), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   rst[,8] <- rst[,9]
@@ -21,6 +23,8 @@ test_that('gt_zonal (x=gt_RasterLayer, y=gt_RasterLayer)', {
 })
 
 test_that('gt_zonal (expected errors)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(seq_len(81), ncol=9), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   zones <- raster::setValues(rst, replace(rep(1:9, each=9), 1, NA))

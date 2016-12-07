@@ -86,7 +86,7 @@ object to match the extent, resolution, and dimensionality of another
 <code><a href='http://www.rdocumentation.org/packages/raster/topics/projectRaster'>projectRaster</a></code>.</p>
     
 
-    <pre><span class='fu'>gt_resample</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)</pre>
+    <pre><span class='fu'>gt_resample</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>method</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -105,13 +105,23 @@ Either &#39;ngb&#39; (nearest neighbor), which is useful for categorical variabl
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object</code>.</p>
+    <p><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/resample'>resample</a></code>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># g &lt;- gt_raster(raster::raster(matrix(runif(9), ncol=3),</span>
+<span class='co'>#                               crs=sp::CRS('+init=epsg:4326'),</span>
+<span class='co'>#                               xmn=0, xmx=3, ymn=2, ymx=10))</span>
+<span class='co'># template &lt;- gt_raster(raster::raster(matrix(runif(4), ncol=2),</span>
+<span class='co'>#                               crs=sp::CRS('+init=epsg:4326'),</span>
+<span class='co'>#                               xmn=0, xmx=3, ymn=2, ymx=10))</span>
+<span class='co'># result &lt;- gt_resample(g, template, method='bilinear')</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -121,7 +131,9 @@ Either &#39;ngb&#39; (nearest neighbor), which is useful for categorical variabl
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

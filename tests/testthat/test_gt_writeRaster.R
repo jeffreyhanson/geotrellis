@@ -1,6 +1,8 @@
 context('gt_writeRaster')
 
 test_that('gt_writeRaster', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=1, xmx=3, ymn=2, ymx=8)
   path <- tempfile(fileext='.tif')

@@ -1,6 +1,8 @@
 context('gt_mask')
 
 test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(1:6), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   mask <- raster::setValues(rst, c(NA, 1:4, NA))
@@ -21,6 +23,8 @@ test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer)', {
 })
 
 test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer, maskvalue, updatevalue)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(1:6), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   mask <- raster::setValues(rst, c(9, 1:4, 9))
@@ -41,6 +45,8 @@ test_that('gt_mask (x=gt_RasterLayer, y=gt_RasterLayer, maskvalue, updatevalue)'
 })
 
 test_that('gt_mask (expected errors)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=1, xmx=3, ymn=2, ymx=8)
   rst2 <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=10, xmx=30, ymn=20, ymx=80)

@@ -92,7 +92,7 @@
       <dd>input object.</dd>
       <dt>...</dt>
       <dd>additional arguments passed to <code><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></code> if <code>x</code>
-is not <code>character</code> or <code>RasterLayer</code>.</dd>
+is not <code>character</code> or <code>raster</code>.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -107,10 +107,10 @@ as raster data using the following methods:
 <li><code><a href='http://www.rdocumentation.org/packages/base/topics/character'>character</a></code> object<code>x</code> is treated as a file path
 for raster data loaded directly into the Scala interpreter.</p>
     <p></li>
-<li><code>RasterLayer</code> object<code>x</code> is saved to disk
+<li><code><a href='http://www.rdocumentation.org/packages/raster/topics/Raster-classes'>RasterLayer-class</a></code> object<code>x</code> is saved to disk
 and loaded into the Scala interpreter.</p>
     <p></li>
-<li>otherwisean attempt is made to coerce <code>x</code> to a <code>RasterLayer</code>
+<li>otherwisean attempt is made to coerce <code>x</code> to a <code><a href='http://www.rdocumentation.org/packages/raster/topics/Raster-classes'>RasterLayer-class</a></code>
 object and then it is saved to disk and loaded into the Scala interpreter.</p>
     <p></li>
 </ul></p>
@@ -121,12 +121,14 @@ object and then it is saved to disk and loaded into the Scala interpreter.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># create gt_raster object using a matrix</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>gt_raster</span>(<span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>))
-<span class='co'># create gt_raster object using a raster</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>gt_raster</span>(<span class='fu'>raster</span>(<span class='fu'>matrix</span>(<span class='fl'>1</span>:<span class='fl'>4</span>, <span class='kw'>ncol</span><span class='kw'>=</span><span class='fl'>2</span>)))
-<span class='co'># create gt_raster object using a file path</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>gt_raster</span>(<span class='fu'>system.file</span>(<span class='st'>"external/test.grd"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"raster"</span>))</div><div class='output co'>#&gt; <span class='error'>Error: File &#39;test.grd&#39; does not have extensiontif</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># # create gt_raster object using a raster</span>
+<span class='co'># g1 &lt;- gt_raster(raster(matrix(1:4, ncol=2)))</span>
+<span class='co'># # create gt_raster object using a geotiff path</span>
+<span class='co'># g2 &lt;- gt_raster(system.file('extdata', 'test.tif', package='geotrellis'))</span>
+<span class='co'># # create gt_raster object using default method</span>
+<span class='co'># g3 &lt;- gt_raster(matrix(1:4, ncol=2))</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -4,14 +4,12 @@
 \alias{gt_zonal}
 \title{Zonal statistics}
 \usage{
-gt_zonal(x, z, ...)
+gt_zonal(x, z)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
 
 \item{z}{\code{\link{gt_RasterLayer}} object with codes representing zones.}
-
-\item{...}{not used.}
 }
 \value{
 \code{\link[base]{matrix}} object with a value for each zone (unique values in)
@@ -24,6 +22,7 @@ Calculate statistics from a \code{\link{gt_RasterLayer}} object using
 zones specified in a second \code{\link{gt_RasterLayer}}.
 }
 \examples{
+\dontrun{
 g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
@@ -31,5 +30,6 @@ z <- gt_raster(raster::raster(matrix(sample(1:3, 9, replace=TRUE), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
 result <- gt_zonal(g, z)
+}
 }
 

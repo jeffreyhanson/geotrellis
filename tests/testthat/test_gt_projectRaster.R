@@ -1,6 +1,8 @@
 context('gt_projectRaster')
 
 test_that('gt_projectRaster (x=gt_RasterLayer, y=CRS)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(1:6), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   rst2 <- suppressWarnings(raster::projectRaster(rst, crs=sp::CRS('+init=epsg:3395'), res=50000, method='ngb'))
@@ -14,6 +16,8 @@ test_that('gt_projectRaster (x=gt_RasterLayer, y=CRS)', {
 })
 
 test_that('gt_projectRaster (x=gt_RasterLayer, y=gt_RasterLayer)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   rst <- raster::raster(matrix(c(1:6), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   rst2 <- raster::crop(rst, extent(c(1,1.5,2,6)))
   rst2 <- suppressWarnings(raster::projectRaster(rst2, crs=sp::CRS('+init=epsg:3395'), res=50000, method='ngb'))
@@ -35,6 +39,8 @@ test_that('gt_projectRaster (x=gt_RasterLayer, y=gt_RasterLayer)', {
 })
 
 test_that('gt_projectRaster (expected errors)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(1:9, ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=1, xmx=3, ymn=2, ymx=8)
   # send data to Scala interpreter

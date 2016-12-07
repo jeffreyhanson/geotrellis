@@ -84,15 +84,12 @@
     <p>Compute statistics using cell data in a <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</p>
     
 
-    <pre><span class='fu'>gt_cellStats</span>(<span class='no'>x</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"sum"</span>, <span class='st'>"mean"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span>, <span class='st'>"sd"</span>))</pre>
+    <pre><span class='fu'>gt_cellStats</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>x</dt>
       <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
-      <dt>stat</dt>
-      <dd><code>character</code> name of the statistic to calculate. The following
-statistics can be used: &#39;sum&#39;, &#39;mean&#39;, &#39;min&#39;, &#39;max&#39;, and &#39;sd&#39;.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -101,9 +98,18 @@ statistics can be used: &#39;sum&#39;, &#39;mean&#39;, &#39;min&#39;, &#39;max&#
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is similar to the <code><a href='http://www.rdocumentation.org/packages/raster/topics/cellStats'>cellStats</a></code> function.</p>
+    <p>This function calculates the mean, median, mode, 
+standard deviation, minimum, and maximum of the values in a raster. This function
+is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/cellStats'>cellStats</a></code>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># g &lt;- gt_raster(raster::raster(matrix(c(1:6), ncol=3),</span>
+<span class='co'>#                               crs=sp::CRS('+init=epsg:4326'),</span>
+<span class='co'>#                               xmn=0, xmx=3, ymn=2, ymx=10))</span>
+<span class='co'># gt_cellStats(g)</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -113,7 +119,9 @@ statistics can be used: &#39;sum&#39;, &#39;mean&#39;, &#39;min&#39;, &#39;max&#
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

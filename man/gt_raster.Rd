@@ -10,7 +10,7 @@ gt_raster(x, ...)
 \item{x}{input object.}
 
 \item{...}{additional arguments passed to \code{\link[raster]{raster}} if \code{x}
-is not \code{character} or \code{RasterLayer}.}
+is not \code{character} or \code{raster}.}
 }
 \value{
 \code{\link{gt_RasterLayer}} object.
@@ -26,21 +26,23 @@ as raster data using the following methods:
 \item{\code{\link[base]{character}} object}{\code{x} is treated as a file path
 for raster data loaded directly into the Scala interpreter.}
 
-\item{\code{\link[raster]{RasterLayer}} object}{\code{x} is saved to disk
+\item{\code{\link[raster]{RasterLayer-class}} object}{\code{x} is saved to disk
 and loaded into the Scala interpreter.}
 
-\item{otherwise}{an attempt is made to coerce \code{x} to a \code{\link[raster]{RasterLayer}}
+\item{otherwise}{an attempt is made to coerce \code{x} to a \code{\link[raster]{RasterLayer-class}}
 object and then it is saved to disk and loaded into the Scala interpreter.} 
 
 }
 }
 \examples{
+\dontrun{
 # create gt_raster object using a raster
 g1 <- gt_raster(raster(matrix(1:4, ncol=2)))
 # create gt_raster object using a geotiff path
 g2 <- gt_raster(system.file('extdata', 'test.tif', package='geotrellis'))
 # create gt_raster object using default method
 g3 <- gt_raster(matrix(1:4, ncol=2))
+}
 }
 \seealso{
 \code{\link[raster]{raster}}.

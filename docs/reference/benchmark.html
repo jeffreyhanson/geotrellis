@@ -85,7 +85,8 @@
 <a href = 'http://geotrellis.io'>http://geotrellis.io</a> and their counterparts in the raster package.</p>
     
 
-    <pre><span class='fu'>benchmark</span>(<span class='kw'>ncell</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>1000</span>, <span class='fl'>10000</span>), <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>100L</span>)</pre>
+    <pre><span class='fu'>benchmark</span>(<span class='kw'>ncell</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>100</span>, <span class='fl'>2500</span>, <span class='fl'>1e+06</span>), <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>100L</span>, <span class='kw'>io</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>gp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>stats</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -93,6 +94,12 @@
       <dd><code>integer</code> number of cells in data to use for bencmarking.</dd>
       <dt>times</dt>
       <dd><code>integer</code> number of replicate runs.</dd>
+      <dt>io</dt>
+      <dd><code>logical</code> should input/output functions be benchmarked?</dd>
+      <dt>gp</dt>
+      <dd><code>logical</code> should geoprocessing functions be benchmarked?</dd>
+      <dt>stats</dt>
+      <dd><code>logical</code> should statistical functions be benchmarked?</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -104,11 +111,18 @@
     <p>This function returns a <code>gt_Benchmark</code> object. This is basically
 a list of <code><a href='http://www.rdocumentation.org/packages/microbenchmark/topics/microbenchmark'>microbenchmark</a></code> objects.</p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code>print.gt_Benchmark</code>, <code>plot.gt_Benchmark</code>.</p>
-    
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># # run short benchmark</span>
+<span class='co'># # note that real benchmarks should use more replications</span>
+<span class='co'># # and that geotrellis is better for bigger data sets</span>
+<span class='co'># b &lt;- benchmark(c(100, 2500), times = 10L)</span>
+<span class='co'># # print results</span>
+<span class='co'># b</span>
+<span class='co'># # plot results</span>
+<span class='co'># plot(b)</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -118,9 +132,9 @@ a list of <code><a href='http://www.rdocumentation.org/packages/microbenchmark/t
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

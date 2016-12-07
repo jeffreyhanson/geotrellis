@@ -15,3 +15,8 @@
     type CellType = DataType with NoDataHandling
   '))
 }
+
+.onUnload <- function(libpath) {
+  try(rscala::close(get('s', asNamespace('geotrellis'))), silent=TRUE)
+}
+

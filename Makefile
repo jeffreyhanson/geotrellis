@@ -36,7 +36,7 @@ site: docs readme
 	rm -rf vignettes/*
 	rm -rf inst/doc/*
 
-vignettes:
+vigns:
 	mkdir -p vignettes
 	cp -f inst/vign/geotrellis.Rmd vignettes/geotrellis.Rmd
 	R --slave -e "devtools::load_all();devtools::build_vignettes()"
@@ -54,4 +54,4 @@ check:
 build:
 	R --slave -e "devtools::build()"
 
-.PHONY: clean jar install docs readme site vignettes test check build 
+.PHONY: clean jar install docs readme site vigns test check build 

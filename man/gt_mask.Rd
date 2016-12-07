@@ -4,14 +4,14 @@
 \alias{gt_mask}
 \title{Mask geotrellis raster data}
 \usage{
-gt_mask(x, y, ...)
+gt_mask(x, mask, maskvalue, updatevalue)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
 
-\item{...}{not used.}
-
 \item{mask}{\code{\link{gt_RasterLayer}} object.}
+
+\item{...}{not used.}
 
 \item{maskvalue}{\code{numeric} The value in \code{mask} that indicates the cells of \code{x}
 that should become missing data values. Defaults to \code{NA}.}
@@ -30,6 +30,7 @@ This function is similar to \code{\link[raster]{mask}}, except that masked value
 are always set to missing data values.
 }
 \examples{
+\dontrun{
 g <- gt_raster(raster::raster(matrix(c(1:6), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
@@ -37,5 +38,6 @@ mask <- gt_raster(raster::raster(matrix(c(NA, 1:4, NA), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
 result <- gt_mask(g, mask)
+}
 }
 

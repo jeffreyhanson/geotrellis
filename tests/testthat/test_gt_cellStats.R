@@ -1,6 +1,8 @@
 context('gt_cellStats')
 
 test_that('gt_cellStats (x=gt_RasterLayer)', {
+  # init
+  skip_if_not(!is.null(rscala::scalaInfo()), 'Scala is not installed')
   # create data
   rst <- raster::raster(matrix(c(NA,1.0,3.0,3.0,4.0,12.0), ncol=3), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   # send data to Scala interpreter

@@ -9,6 +9,7 @@ NULL
 #' @name gt_RasterLayer-methods
 #' @seealso \code{\link{gt_RasterLayer}}
 #' @examples
+#' \dontrun{
 #' g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
 #'                               crs=sp::CRS('+init=epsg:4326'),
 #'                               xmn=0, xmx=3, ymn=2, ymx=10))
@@ -21,6 +22,7 @@ NULL
 #' extent(g) # spatial extent
 #' as.matrix(g) # coerce data to matrix object
 #' as.raster(g) # coerce data to matrix object
+#' }
 NULL
 
 #' @rdname gt_RasterLayer-methods

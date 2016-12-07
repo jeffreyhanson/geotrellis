@@ -4,12 +4,15 @@
 \alias{gt_writeRaster}
 \title{Write geotrellis raster to file}
 \usage{
-gt_writeRaster(x, path)
+gt_writeRaster(x, path, overwrite = FALSE)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
 
-\item{x}{\code{character} file path.}
+\item{path}{\code{character} file path.}
+
+\item{overwrite}{\code{character} if the file path specifed in \code{path}
+already exists should it be overwritten? Defaults to \code{FALSE}.}
 }
 \value{
 \code{invisible()}. This function is used for its side-effect
@@ -19,9 +22,11 @@ of producing files on disk.
 Save a \code{\link{gt_RasterLayer}} object to disk in a GeoTIFF format.
 }
 \examples{
+\dontrun{
 g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
                               crs=sp::CRS('+init=epsg:4326'),
                               xmn=0, xmx=3, ymn=2, ymx=10))
 gt_writeRaster(g, tempfile(fileext='.tif'))
+}
 }
 
