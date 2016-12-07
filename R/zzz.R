@@ -11,6 +11,7 @@
     import geotrellis.raster.io.geotiff.writer.GeoTiffWriter
     import geotrellis.raster.reproject._
     import geotrellis.raster.resample._
+    import geotrellis.raster.mapalgebra._
     type CellType = DataType with NoDataHandling
   '))
 }

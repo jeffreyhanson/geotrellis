@@ -38,6 +38,20 @@
 \description{
 These are convience wrappers for \code{\link{gt_RasterLayer}} objects.
 }
+\examples{
+g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+ncell(g) # number of cells
+ncol(g) # number of columns
+nrow(g) # number of rows
+nrow(g) # number of rows
+crs(g) # coordinate reference system
+res(g) # cell resolution
+extent(g) # spatial extent
+as.matrix(g) # coerce data to matrix object
+as.raster(g) # coerce data to matrix object
+}
 \seealso{
 \code{\link{gt_RasterLayer}}
 }

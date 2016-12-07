@@ -4,13 +4,12 @@
 \alias{gt_cellStats}
 \title{Statistics across cells}
 \usage{
-gt_cellStats(x, stat = c("sum", "mean", "min", "max", "sd"))
+gt_cellStats(x, ...)
 }
 \arguments{
 \item{x}{\code{\link{gt_RasterLayer}} object.}
 
-\item{stat}{\code{character} name of the statistic to calculate. The following
-statistics can be used: 'sum', 'mean', 'min', 'max', and 'sd'.}
+\item{...}{not used.}
 }
 \value{
 \code{numeric} object.
@@ -19,6 +18,14 @@ statistics can be used: 'sum', 'mean', 'min', 'max', and 'sd'.}
 Compute statistics using cell data in a \code{\link{gt_RasterLayer}} object.
 }
 \details{
-This function is similar to the \code{\link[raster]{cellStats}} function.
+This function calculates the mean, median, mode, 
+standard deviation, minimum, and maximum of the values in a raster. This function
+is similar to \code{\link[raster]{cellStats}}.
+}
+\examples{
+g <- gt_raster(raster::raster(matrix(c(1:6), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+gt_cellStats(g)
 }
 

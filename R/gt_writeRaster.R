@@ -5,6 +5,11 @@
 #' @param x \code{character} file path.
 #' @return \code{invisible()}. This function is used for its side-effect
 #' of producing files on disk. 
+#' @examples
+#' g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+#'                               crs=sp::CRS('+init=epsg:4326'),
+#'                               xmn=0, xmx=3, ymn=2, ymx=10))
+#' gt_writeRaster(g, tempfile(fileext='.tif'))
 #' @export
 gt_writeRaster <- function(x, path) {
   assertthat::assert_that(

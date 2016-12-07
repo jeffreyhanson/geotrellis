@@ -4,6 +4,9 @@
 #' Scala command to turn it into a CRS object in geotrellis.
 #' @param x \code{\link[sp]{CRS}} object.
 #' @return \code{character} object.
+#' @example
+#' geotrellis:::.parse.CRS(sp::CRS('+init=epsg:4326'))
+#' geotrellis:::.parse.CRS(sp::CRS('+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0'))
 #' @noRd
 .parse.CRS <- function(x) {
   assertthat::assert_that(inherits(x, 'CRS'))
@@ -28,6 +31,9 @@
 #' geotrellis package.
 #' @param x \code{character} object.
 #' @return \code{character} object.
+#' @examples
+#' .parse.resample.method('bilinear')
+#' .parse.resample.method('ngb')
 #' @noRd
 .parse.resample.method <- function(x) {
   assertthat::assert_that(inherits(x, 'character'))

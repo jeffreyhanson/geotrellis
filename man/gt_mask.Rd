@@ -29,4 +29,13 @@ Mask data in a \code{\link{gt_RasterLayer}} object using another \code{\link{gt_
 This function is similar to \code{\link[raster]{mask}}, except that masked values in \code{x}
 are always set to missing data values.
 }
+\examples{
+g <- gt_raster(raster::raster(matrix(c(1:6), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+mask <- gt_raster(raster::raster(matrix(c(NA, 1:4, NA), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+result <- gt_mask(g, mask)
+}
 

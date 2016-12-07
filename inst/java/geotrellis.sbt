@@ -7,10 +7,10 @@ scalaVersion := "2.11.8"
 resolvers += "LocationTech GeoTrellis Releases" at "https://repo.locationtech.org/content/repositories/geotrellis-releases"
 
 libraryDependencies ++= Seq(
-  "org.locationtech.geotrellis" %% "geotrellis-spark"  % "1.0.0-RC2",
-  "org.locationtech.geotrellis" %% "geotrellis-raster" % "1.0.0-RC2",
-  "org.locationtech.geotrellis" %% "geotrellis-vector" % "1.0.0-RC2",
-  "org.locationtech.geotrellis" %% "geotrellis-util"   % "1.0.0-RC2",
+  "org.locationtech.geotrellis" %% "geotrellis-spark"  % "1.0.0-RC3",
+  "org.locationtech.geotrellis" %% "geotrellis-raster" % "1.0.0-RC3",
+  "org.locationtech.geotrellis" %% "geotrellis-vector" % "1.0.0-RC3",
+  "org.locationtech.geotrellis" %% "geotrellis-util"   % "1.0.0-RC3",
   "org.apache.spark"      %% "spark-core"        % "2.0.1" % "provided",
   "org.scalatest"         %% "scalatest"         % "3.0.0" % "test"
 )

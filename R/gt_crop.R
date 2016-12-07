@@ -11,6 +11,12 @@ NULL
 #' @return \code{\link{gt_RasterLayer}} object.
 #' @details This function is similar to \code{\link[raster]{crop}}, except that \code{y}
 #' must be a \code{\link{gt_RasterLayer}} object and not just any \code{\link[sp]{Spatial}} object.
+#' @examples
+#' g <- gt_raster(raster::raster(matrix(c(1:6), ncol=3),
+#'                               crs=sp::CRS('+init=epsg:4326'),
+#'                               xmn=0, xmx=3, ymn=2, ymx=10))
+#' ext <- extent(c(0, 3, 2, 6))
+#' result <- gt_crop(g, ext)
 #' @export
 setGeneric('gt_crop', function(x, y) {standardGeneric('gt_crop')})
 

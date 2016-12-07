@@ -23,14 +23,14 @@ NULL
 #' }
 #' @return \code{\link{gt_RasterLayer}} object.
 #' @seealso \code{\link[raster]{raster}}.
-#' @export
 #' @examples
-#' # create gt_raster object using a matrix
-#' x <- gt_raster(matrix(1:4, ncol=2))
 #' # create gt_raster object using a raster
-#' x <- gt_raster(raster(matrix(1:4, ncol=2)))
-#' # create gt_raster object using a file path
-#' x <- gt_raster(system.file("external/test.grd", package="raster"))
+#' g1 <- gt_raster(raster(matrix(1:4, ncol=2)))
+#' # create gt_raster object using a geotiff path
+#' g2 <- gt_raster(system.file('extdata', 'test.tif', package='geotrellis'))
+#' # create gt_raster object using default method
+#' g3 <- gt_raster(matrix(1:4, ncol=2))
+#' @export
 setGeneric('gt_raster', function(x, ...) {standardGeneric('gt_raster')})
 
 #' @export

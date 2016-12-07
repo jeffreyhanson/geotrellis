@@ -15,6 +15,14 @@ NULL
 #' @param ... not used.
 #' @return \code{\code{\link{gt_RasterLayer}} object}.
 #' @details This function is similar to \code{\link[raster]{resample}}.
+#' @examples
+#' g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+#'                               crs=sp::CRS('+init=epsg:4326'),
+#'                               xmn=0, xmx=3, ymn=2, ymx=10))
+#' template <- gt_raster(raster::raster(matrix(runif(4), ncol=2),
+#'                               crs=sp::CRS('+init=epsg:4326'),
+#'                               xmn=0, xmx=3, ymn=2, ymx=10))
+#' result <- gt_resample(g, template, method='bilinear')
 #' @export
 setGeneric('gt_resample', function(x, y, ...) {standardGeneric('gt_resample')})
 

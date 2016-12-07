@@ -42,4 +42,18 @@ extent, number of rows and columns, projection, and resolution
 This function is similar to \code{\link[raster]{compareRaster}}
 except that is is less rigorous.
 }
+\examples{
+g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+g2 <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+                              crs=sp::CRS('+init=epsg:3395'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+g3 <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=10, xmx=13, ymn=12, ymx=20))
+gt_compareRaster(g, g) # same properties
+gt_compareRaster(g, g2, stopiffalse=FALSE) # different crs
+gt_compareRaster(g, g2, stopiffalse=FALSE) # different extent
+}
 

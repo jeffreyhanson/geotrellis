@@ -1,7 +1,7 @@
 #' @include gt_RasterLayer.R
 NULL
 
-#' Reproject geotrellis raster data
+#' Project geotrellis raster to a new coordinate system
 #'
 #' This function reprojects a geotrellis raster data \code{\link{gt_RasterLayer}}
 #' object to a new coordinate system. This function is similar to \code{\link[raster]{projectRaster}}.
@@ -16,6 +16,11 @@ NULL
 #' a project \code{\link{gt_RasterLayer}} and ensure that the returned raster has a specific 
 #' extent and dimensionality.
 #' @return \code{\code{\link{gt_RasterLayer}} object}.
+#' @examples
+#' g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+#'                               crs=sp::CRS('+init=epsg:4326'),
+#'                               xmn=0, xmx=3, ymn=2, ymx=10))
+#' result <- gt_projectRaster(g, sp::CRS('+init=epsg:3395'), res=50000, method='ngb')
 #' @export
 setGeneric('gt_projectRaster', function(from, to, ...) {standardGeneric('gt_projectRaster')})
 

@@ -3,6 +3,11 @@
 #' @import sp
 NULL
 
+#' @importFrom methods setOldClass
+#' @importFrom methods setMethod
+#' @export
+setOldClass('gt_RasterLayer')
+
 #' Geotrellis raster layer class
 #'
 #' This class represents geotrellis raster data objects in R. Note that
@@ -286,13 +291,33 @@ data source : Scala interpreter\n'))
    },
     
     ### statistics methods
-    cellStats = function(stat) {
-      stop('TODO')
+    cellStats = function() {
+      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0('
+        val s = ',self$id,'.tile.statisticsDouble.get
+        val a = Array(s.mean, s.median, s.mode, s.stddev, s.zmin, s.zmax)'
+      ))
+      r <- rscala::scalaGet(s, 'a')
+      names(r) <- c('mean', 'median', 'mode', 'sd', 'min', 'max')
+      r
     },
-    zonal = function(y, stat) {
-      stop('TODO')
+    zonal = function(y) {
+      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0('
+        val a = ',self$id,'.tile.zonalStatisticsDouble(',y$id,')
+        .map{case (k,v) => Array(k, v.mean, v.median, v.mode, v.stddev)}
+        .toArray
+        for (i <- 0 until a.length) {
+          if (a(i)(0).toInt == NODATA) {
+            a(i)(0) = Double.NaN;
+          }
+        }
+        '
+      ))
+      r <- as.data.frame(rscala::scalaGet(get('s', asNamespace('geotrellis')), 'a'))
+      names(r) <- c('zone', 'mean', 'median', 'mode', 'sd')
+      r <- r[is.finite(r[[1]]),]
+      r <- r[order(r[[1]]),]
+      rownames(r) <- NULL
+      r
     }
-
   )
 )
-

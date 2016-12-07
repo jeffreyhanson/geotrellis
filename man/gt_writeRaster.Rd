@@ -18,4 +18,10 @@ of producing files on disk.
 \description{
 Save a \code{\link{gt_RasterLayer}} object to disk in a GeoTIFF format.
 }
+\examples{
+g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+gt_writeRaster(g, tempfile(fileext='.tif'))
+}
 

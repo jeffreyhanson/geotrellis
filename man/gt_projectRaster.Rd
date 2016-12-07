@@ -2,7 +2,7 @@
 % Please edit documentation in R/gt_projectRaster.R
 \name{gt_projectRaster}
 \alias{gt_projectRaster}
-\title{Reproject geotrellis raster data}
+\title{Project geotrellis raster to a new coordinate system}
 \usage{
 gt_projectRaster(from, to, ...)
 }
@@ -29,5 +29,11 @@ Note that--unlike \code{\link[raster]{projectRaster}}--this function does not ha
 a \code{to} argument. Therefore users cannot specify a template projected raster to reproject
 a project \code{\link{gt_RasterLayer}} and ensure that the returned raster has a specific 
 extent and dimensionality.
+}
+\examples{
+g <- gt_raster(raster::raster(matrix(runif(9), ncol=3),
+                              crs=sp::CRS('+init=epsg:4326'),
+                              xmn=0, xmx=3, ymn=2, ymx=10))
+result <- gt_projectRaster(g, sp::CRS('+init=epsg:3395'), res=50000, method='ngb')
 }
 
