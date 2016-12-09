@@ -8,7 +8,7 @@ benchmark(ncell = c(100, 2500, 1e+06), times = 100L, io = TRUE,
   gp = TRUE, stats = TRUE)
 }
 \arguments{
-\item{ncell}{\code{integer} number of cells in data to use for bencmarking.}
+\item{ncell}{\code{integer} number of cells in data to use for benchmarking.}
 
 \item{times}{\code{integer} number of replicate runs.}
 

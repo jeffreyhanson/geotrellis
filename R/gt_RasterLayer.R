@@ -95,7 +95,7 @@ gt_RasterLayer <- R6::R6Class('gt_RasterLayer',
   public = list(
     
     ## fields
-    id = NULL,
+    data = NULL,
     crs = NULL,
     extent = NULL,
     no_data_value = NULL,
@@ -106,9 +106,18 @@ gt_RasterLayer <- R6::R6Class('gt_RasterLayer',
     ncell =  NULL,
     
     ## constructor and destructor methods
-    initialize = function(id = ids::random_id()) {
-      # create id variable to store data in scala
-      self$id <<- paste0('rst_', id)
+    initialize = function(data) {
+      # create data
+      if (inherits(data, 'ScalaInterpreterReference')) {
+        self$data <<- data
+        self$read_metadata()
+      } else if (inherits(data, 'character')) {
+        self$read_data(data)
+        self$read_metadata()
+      } else {
+        stop('data type not valid')
+      }
+      
     },
     finalize = function() {
       self$delete_data()
@@ -130,53 +139,24 @@ data source : Scala interpreter\n'))
     
     ## data management methods
     read_data = function(path) {
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',self$id,' = GeoTiffReader.readSingleband("',path,'").projectedRaster'
-      ))
+      self$data <<- get('.read_data', asNamespace('geotrellis'))(path, as.reference=TRUE)
     },
     delete_data = function() {
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',self$id,' = null'
-      ))
+      self$data <- NULL
     },
     write_data = function(path) {
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-       'SinglebandGeoTiff(',self$id,'.tile,',
-                            self$id,'.raster.extent,',
-                            self$id,'.crs).write("',path,'")'
-      ))
+      invisible(get('.write_data', asNamespace('geotrellis'))(self$data, path))
     },
     read_metadata = function() {
-      # create variables in Scala interpreter
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0('
-        val p = ',self$id,'.crs.toProj4String
-        val e = Array(',self$id,'.extent.xmin,', self$id,'.extent.xmax,',
-            self$id,'.extent.ymin,', self$id,'.extent.ymax)
-        val n = ',self$id,'.raster.size
-        val nr = ',self$id,'.raster.rows
-        val nc = ',self$id,'.raster.cols
-        val t  = ',self$id,'.raster.cellType.toString()
-        val r = Array(',self$id,'.raster.cellSize.width, ',self$id,'.raster.cellSize.height)
-        val nd:Double = ',self$id,'.raster.cellType match {
-          case DoubleUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case IntUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case FloatUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case UShortUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case ShortUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case ByteUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case UByteUserDefinedNoDataCellType(noDataValue) => noDataValue
-          case _ => throw new Exception("")
-        }'
-      ))
       # retreive variables from Scala interpreter
-      self$no_data_value <<- rscala::scalaGet(get('s', asNamespace('geotrellis')), 'nd')
-      self$crs <<- sp::CRS(rscala::scalaGet(get('s', asNamespace('geotrellis')), 'p'))
-      self$extent <<- raster::extent(rscala::scalaGet(get('s', asNamespace('geotrellis')), 'e'))
-      self$ncell <<- rscala::scalaGet(get('s', asNamespace('geotrellis')), 'n')
-      self$nrow <<- rscala::scalaGet(get('s', asNamespace('geotrellis')), 'nr')
-      self$ncol <<- rscala::scalaGet(get('s', asNamespace('geotrellis')), 'nc')
-      self$res <<- rscala::scalaGet(get('s', asNamespace('geotrellis')), 'r')
-      self$data_type <<- rscala::scalaGet(get('s', asNamespace('geotrellis')), 't')
+      self$no_data_value <<- get('.read_metadata_no_data_value', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+      self$crs <<- sp::CRS(get('.read_metadata_crs', asNamespace('geotrellis'))(self$data, as.reference=FALSE))
+      self$extent <<- raster::extent(get('.read_metadata_extent', asNamespace('geotrellis'))(self$data, as.reference=FALSE))
+      self$ncell <<- get('.read_metadata_ncell', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+      self$nrow <<- get('.read_metadata_nrow', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+      self$ncol <<- get('.read_metadata_ncol', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+      self$res <<- get('.read_metadata_res', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+      self$data_type <<- get('.read_metadata_data_type', asNamespace('geotrellis'))(self$data, as.reference=NA)
       if (!is.numeric(self$no_data_value)) 
         self$no_data_value <- NA_real_
       # check that retreived values are valid
@@ -197,15 +177,10 @@ data source : Scala interpreter\n'))
     ## data access methods
     values = function() {
       if (grepl('^Double.*$', self$data_type) || grepl('^Float.*$', self$data_type)) {
-        rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-          'val v = ',self$id,'.raster.toArrayDouble()'
-        ))
+        r <- get('.values_double', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
       } else {
-        rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-          'val v = ',self$id,'.raster.toArray()'
-        ))
+        r <- get('.values_integer', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
       }
-      r <- rscala::scalaGet(get('s', asNamespace('geotrellis')), 'v')
       r <- replace(r, r == self$no_data_value, NA)
       r
     },
@@ -232,87 +207,35 @@ data source : Scala interpreter\n'))
     },
     
     ## geoprocessing methods
-    project.to.crs = function(to, res, method) {
-      r <- gt_RasterLayer$new()
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',r$id,' = ',self$id,'.reproject(dest=',.parse.CRS(to),',',
-        'options=Reproject.Options(method=',.parse.resample.method(method),',',
-                                  'targetCellSize=Option(CellSize(',res[1],',',res[2],'))))'
-      ))
-      r$read_metadata()
+    project_to_crs = function(to, res, method) {
+      to <- .parse.CRS(to)
+      if (is.numeric(to)) {
+        r <- gt_RasterLayer$new(get('.project_to_epsg_crs', asNamespace('geotrellis'))(self$data, to, res, method, as.reference=TRUE))
+      } else {
+        r <- gt_RasterLayer$new(get('.project_to_unnamed_crs', asNamespace('geotrellis'))(self$data, to, res, method, as.reference=TRUE))
+      }
       r
     },
-    project.to.raster = function(to, method) {
-      r <- gt_RasterLayer$new()
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',r$id,' = ',self$id,'.reproject(dest=',.parse.CRS(to$crs),',',
-        'options=Reproject.Options(method=',.parse.resample.method(method),',',
-                                  'targetRasterExtent=Option(',to$id,'.rasterExtent)))'
-      ))
-      r$read_metadata()
-      r
+    project_to_raster = function(to, method) {
+      gt_RasterLayer$new(get('.project_to_raster', asNamespace('geotrellis'))(self$data, to$data, method, as.reference=TRUE))
     },
     resample = function(y, method) {
-      r <- gt_RasterLayer$new()
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',r$id,' = ProjectedRaster(',self$id,'.raster.resample(method=',.parse.resample.method(method),',',
-                                                   'target=',y$id,'.rasterExtent),',
-                                        self$id,'.crs)'
-      ))
-      r$read_metadata()
-      r
+      gt_RasterLayer$new(get('.resample', asNamespace('geotrellis'))(self$data, y$data, method, as.reference=TRUE))
     }, 
     mask = function(y, maskvalue, updatevalue) {
-      r <- gt_RasterLayer$new()
-      if (is.na(maskvalue)) maskvalue <- 'NODATA'
-      if (is.na(updatevalue)) updatevalue <- 'NODATA'
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',r$id,' = ProjectedRaster(Raster(',self$id,'.tile.localMask(r=',y$id,',',
-                                                                         'readMask=',maskvalue,',',
-                                                                         'writeMask=',updatevalue,'),',
-                                               self$id,'.extent),',
-                                        self$id,'.crs)'
-      ))
-      r$read_metadata()
-      r
-      
+      gt_RasterLayer$new(get('.mask', asNamespace('geotrellis'))(self$data, y$data, maskvalue, updatevalue, as.reference=TRUE))
     },
     crop = function(extent) {
-      r <- gt_RasterLayer$new()
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0(
-        'val ',r$id,' = ProjectedRaster(',self$id,'.raster.crop(Extent(xmin=',extent@xmin,',',
-                                                                      'xmax=',extent@xmax,',',
-                                                                      'ymin=',extent@ymin,',',
-                                                                      'ymax=',extent@ymax,')),',
-                                        self$id,'.crs)'
-      ))
-      r$read_metadata()
-      r
-   },
-    
+      gt_RasterLayer$new(get('.crop', asNamespace('geotrellis'))(self$data, extent@xmin, extent@xmax, extent@ymin, extent@ymax, as.reference=TRUE))
+    },
+  
     ### statistics methods
     cellStats = function() {
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0('
-        val s = ',self$id,'.tile.statisticsDouble.get
-        val a = Array(s.mean, s.median, s.mode, s.stddev, s.zmin, s.zmax)'
-      ))
-      r <- rscala::scalaGet(s, 'a')
-      names(r) <- c('mean', 'median', 'mode', 'sd', 'min', 'max')
-      r
+      structure(get('.cellStats', asNamespace('geotrellis'))(self$data, as.reference=FALSE),
+                names=c('mean', 'median', 'mode', 'sd', 'min', 'max'))
     },
     zonal = function(y) {
-      rscala::scalaEval(get('s', asNamespace('geotrellis')), paste0('
-        val a = ',self$id,'.tile.zonalStatisticsDouble(',y$id,')
-        .map{case (k,v) => Array(k, v.mean, v.median, v.mode, v.stddev)}
-        .toArray
-        for (i <- 0 until a.length) {
-          if (a(i)(0).toInt == NODATA) {
-            a(i)(0) = Double.NaN;
-          }
-        }
-        '
-      ))
-      r <- as.data.frame(rscala::scalaGet(get('s', asNamespace('geotrellis')), 'a'))
+      r <- as.data.frame(get('.zonal', asNamespace('geotrellis'))(self$data, y$data, as.reference=FALSE))
       names(r) <- c('zone', 'mean', 'median', 'mode', 'sd')
       r <- r[is.finite(r[[1]]),]
       r <- r[order(r[[1]]),]

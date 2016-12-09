@@ -9,7 +9,9 @@ test_that('gt_cellStats (x=gt_RasterLayer)', {
   g <- gt_raster(rst)
   # calculate statistics
   stats1 <- gt_cellStats(g)
-  stats2 <- sapply(c(mean, median, function(x, na.rm=TRUE) {as.numeric(names(which.max(table(x))))}, sd, min, max),
+  stats2 <- sapply(c(mean, median, function(x, na.rm=TRUE) {as.numeric(names(which.max(table(x))))}, 
+                     function(x, na.rm=TRUE) {n <- sum(!is.na(x)); n <- sqrt((n-1)/n); sd(x, na.rm=TRUE) * n}, 
+                     min, max),
                    cellStats, x=rst)
   # tests
   expect_equal(unname(stats1), stats2)

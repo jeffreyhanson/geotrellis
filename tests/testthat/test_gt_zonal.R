@@ -7,7 +7,9 @@ test_that('gt_zonal (x=gt_RasterLayer, y=gt_RasterLayer)', {
   rst <- raster::raster(matrix(seq_len(81), ncol=9), crs=sp::CRS('+init=epsg:4326'), xmn=0, xmx=3, ymn=2, ymx=10)
   rst[,8] <- rst[,9]
   zones <- raster::setValues(rst, replace(rep(1:9, each=9), 1, NA))
-  m <- lapply(c(mean, median, function(x, na.rm=TRUE) {as.numeric(names(which.max(table(x))))}, sd),
+  m <- lapply(c(mean, median, 
+                function(x, na.rm=TRUE) {as.numeric(names(which.max(table(x))))},
+                function(x, na.rm=TRUE) {n <- sum(!is.na(x)); n <- sqrt((n-1)/n); sd(x, na.rm=TRUE) * n}),
               zonal, x=rst, z=zones)
   # send data to Scala interpreter
   g <- gt_raster(rst)

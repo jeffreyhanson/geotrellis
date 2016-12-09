@@ -42,10 +42,7 @@ setMethod('gt_raster', signature(x='character'),
       inherits(x, 'character'),
       assertthat::is.readable(x),
       assertthat::has_extension(x, 'tif'))
-    r <- gt_RasterLayer$new()
-    r$read_data(x)
-    r$read_metadata()
-    r
+    gt_RasterLayer$new(x)
   })
 
 #' @export

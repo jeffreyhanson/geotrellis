@@ -43,7 +43,7 @@ setMethod('gt_projectRaster', signature(from='gt_RasterLayer', to='CRS'),
       !is.na(to@projargs))
     method <- match.arg(method)
     if (length(res)==1) res <- c(res, res)
-    from$project.to.crs(to, res, method)
+    from$project_to_crs(to, res, method)
   })
 
 #' @export
@@ -54,5 +54,5 @@ setMethod('gt_projectRaster', signature(from='gt_RasterLayer', to='gt_RasterLaye
       inherits(to, 'gt_RasterLayer'),
       !is.na(to$crs@projargs))
     method <- match.arg(method)
-    from$project.to.raster(to, method)
+    from$project_to_raster(to, method)
   })
