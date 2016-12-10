@@ -77,8 +77,8 @@ setOldClass('gt_RasterLayer')
 #' \code{$values()} values in data associated with the object.
 #' \code{$compare(y)} compare the spatial properties of the object with another object.
 #'
-#' \code{$project.to.crs(crs, res, method)} project data to new coordinate system.
-#' \code{$project.to.raster(y, method)} project data to new coordinate system using
+#' \code{$project_to_crs(crs, res, method)} project data to new coordinate system.
+#' \code{$project_to_raster(y, method)} project data to new coordinate system using
 #' another object as a template.
 #' \code{$resample(y, method)} resample a data to match the spatial properties of another object.
 #' \code{$mask(y, maskvalue)} mask data by another object.

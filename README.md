@@ -6,12 +6,7 @@
 
 # Leverage [geotrellis](http://geotrellis.io) to read, write, manipulate, and analyze spatial data from within [R](https://cran.r-project.org).
 
-This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **It should not be used for any analysis.**
-
-
-```
-## Error in f(..., self = self): Breaks and labels are different lengths
-```
+This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **Generally, this package seems to be slower than the (raster package)[https://CRAN.R-project.org/package=raster]. Additionally, I would not recommend this package for any real analysis.** 
 
 ![Benchmark comparing functions from the "geotrellis" and "raster" R packages.](inst/vign/readme-figure/unnamed-chunk-1-1.png)
 

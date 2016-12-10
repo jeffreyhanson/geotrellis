@@ -15,7 +15,8 @@ Imports:
     rscala,
     assertthat,
 Suggests:
-    testthat
+    testthat,
+    knitr
 Depends:
     R(>= 3.1.0),
     raster,
@@ -28,7 +29,7 @@ BugReports: https://github.com/jeffreyhanson/geotrellis/issues
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 Maintainer: Jeffrey O Hanson <jeffrey.hanson@uqconnect.edu.au>
-SystemRequirements: Java (>= 8)
+SystemRequirements: Java (>= 1.8.0)
 Collate:
     'internal.R'
     'gt_RasterLayer.R'
