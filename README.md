@@ -8,6 +8,11 @@
 
 This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **It should not be used for any analysis.**
 
+
+```
+## Error in f(..., self = self): Breaks and labels are different lengths
+```
+
 ![Benchmark comparing functions from the "geotrellis" and "raster" R packages.](inst/vign/readme-figure/unnamed-chunk-1-1.png)
 
 ## Installation

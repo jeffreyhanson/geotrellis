@@ -131,7 +131,7 @@ plot.gt_Benchmark <- function(x) {
   # init
   assertthat::assert_that(inherits(x, 'gt_Benchmark'))
   extract_data <- function(x, ncell, type) {
-    r <- data.frame(summary(x, 's'))[,c('expr', 'median')]
+    r <- data.frame(summary(x, 'ms'))[,c('expr', 'median')]
     names(r) <- c('name', 'run_time')
     r$package <- factor(paste(sapply(strsplit(as.character(r$name), '_'), `[[`, 1), 'package'))
     r$Operation <- factor(sapply(strsplit(as.character(r$name), '_'), `[[`, 2))
@@ -156,7 +156,7 @@ plot.gt_Benchmark <- function(x) {
   ggplot2::geom_line() +
   ggplot2::geom_point() +
   ggplot2::xlab('Number of cells') + 
-  ggplot2::ylab('Time (seconds)') + 
+  ggplot2::ylab('Time (ms)') + 
   ggplot2::facet_grid(package ~ type)
 }
 
