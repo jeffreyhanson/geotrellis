@@ -13,7 +13,8 @@ env:
   global:
     - R_LIBS="http://cran.rstudio.com"
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
-  
+    - R_CHECK_ARGS="--no-codoc"
+
 warnings_are_errors: true
 
 apt_packages:

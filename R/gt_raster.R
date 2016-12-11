@@ -35,6 +35,7 @@ NULL
 #' @export
 setGeneric('gt_raster', function(x, ...) {standardGeneric('gt_raster')})
 
+#' @rdname gt_raster
 #' @export
 setMethod('gt_raster', signature(x='character'),
   function(x) {
@@ -45,6 +46,7 @@ setMethod('gt_raster', signature(x='character'),
     gt_RasterLayer$new(x)
   })
 
+#' @rdname gt_raster
 #' @export
 setMethod('gt_raster', signature(x='RasterLayer'),
   function(x) {
@@ -53,6 +55,7 @@ setMethod('gt_raster', signature(x='RasterLayer'),
     gt_raster(path)
   })
 
+#' @rdname gt_raster
 #' @export
 setMethod('gt_raster', signature(x='ANY'),
   function(x, ...) {

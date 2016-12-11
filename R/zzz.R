@@ -19,7 +19,7 @@
   # for reasons unknown...
   # the first scalaDef that uses geotrellis always results in an error
   # so trigger this error and then moeve onto the real definitations
-  r <- capture.output(try(rscala::scalaDef(s,'x:geotrellis.raster.ProjectedRaster[geotrellis.raster.Tile]', 'x'), silent=TRUE))
+  r <- utils::capture.output(try(rscala::scalaDef(s,'x:geotrellis.raster.ProjectedRaster[geotrellis.raster.Tile]', 'x'), silent=TRUE))
   
   # create scala functions
   .read_data <- rscala::scalaDef(s,'path:String',
@@ -90,9 +90,8 @@
                             }
                           }
                           a')
-
 }
 .onUnload <- function(libpath) {
-  try(rscala::close(get('s', asNamespace('geotrellis'))), silent=TRUE)
+  try(rscala:::close.ScalaInterpreter(get('s', asNamespace('geotrellis'))), silent=TRUE)
 }
 

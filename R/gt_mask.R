@@ -28,6 +28,7 @@ NULL
 #' @export
 setGeneric('gt_mask', function(x, mask, ...) {standardGeneric('gt_mask')})
 
+#' @rdname gt_mask
 #' @export
 setMethod('gt_mask', signature(x='gt_RasterLayer', mask='gt_RasterLayer'),
   function(x, mask, maskvalue=NA, updatevalue=NA) {

@@ -29,6 +29,7 @@ NULL
 #' @export
 setGeneric('gt_resample', function(x, y, ...) {standardGeneric('gt_resample')})
 
+#' @rdname gt_resample
 #' @export
 setMethod('gt_resample', signature(x='gt_RasterLayer', y='gt_RasterLayer'),
   function(x, y, method=c('bilinear', 'ngb')) {

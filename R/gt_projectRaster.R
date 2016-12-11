@@ -31,6 +31,7 @@ NULL
 #' @export
 setGeneric('gt_projectRaster', function(from, to, ...) {standardGeneric('gt_projectRaster')})
 
+#' @rdname gt_projectRaster
 #' @export
 setMethod('gt_projectRaster', signature(from='gt_RasterLayer', to='CRS'),
   function(from, to, res, method=c('bilinear', 'ngb')) {
@@ -46,6 +47,7 @@ setMethod('gt_projectRaster', signature(from='gt_RasterLayer', to='CRS'),
     from$project_to_crs(to, res, method)
   })
 
+#' @rdname gt_projectRaster
 #' @export
 setMethod('gt_projectRaster', signature(from='gt_RasterLayer', to='gt_RasterLayer'),
   function(from, to, method=c('bilinear', 'ngb')) {

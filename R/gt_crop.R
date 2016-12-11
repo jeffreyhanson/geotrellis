@@ -22,6 +22,7 @@ NULL
 #' @export
 setGeneric('gt_crop', function(x, y) {standardGeneric('gt_crop')})
 
+#' @rdname gt_crop
 #' @export
 setMethod('gt_crop', signature(x='gt_RasterLayer', y='Extent'),
   function(x, y) {
@@ -32,6 +33,7 @@ setMethod('gt_crop', signature(x='gt_RasterLayer', y='Extent'),
   x$crop(y)
 })
 
+#' @rdname gt_crop
 #' @export
 setMethod('gt_crop', signature(x='gt_RasterLayer', y='gt_RasterLayer'),
   function(x, y) {

@@ -30,7 +30,7 @@
 #' @return \code{list} object.
 #' @noRd
 .rasterOptions <- function() {
-  a <- {capture.output(r <- raster::rasterOptions())}
+  a <- {utils::capture.output(r <- raster::rasterOptions())}
   r
 }
 
@@ -44,7 +44,7 @@
 #' many values to return. Defaults to \code{\link[base]{runif}}.
 #' @return \code{\link[raster]{RasterLayer-class}}
 #' @noRd
-.random.raster <- function(x, ..., fun = runif, toDisk=NULL) {
+.random.raster <- function(x, ..., fun = stats::runif, toDisk=NULL) {
   assertthat::assert_that(
     inherits(x, 'RasterLayer') || (inherits(x, 'numeric') &  x == ceiling(x)))
   if (!inherits(x, 'RasterLayer')) {

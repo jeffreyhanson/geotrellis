@@ -6,19 +6,17 @@ Description: Leverage geotrellis (<http://geotrellis.io>) to read, write,
     manipulate, and analyze spatial data from within R.
 Imports:
     utils,
-    graphics,
-    grDevices,
     methods,
+    R6,
     ggplot2,
-    microbenchmark,
-    ids,
     rscala,
-    assertthat,
+    assertthat
 Suggests:
+    microbenchmark,
     testthat,
     knitr
 Depends:
-    R(>= 3.1.0),
+    R(>= 3.3.1),
     raster,
     sp
 License: GPL-3
@@ -27,9 +25,9 @@ LazyData: true
 URL: https://github.com/jeffreyhanson/geotrellis
 BugReports: https://github.com/jeffreyhanson/geotrellis/issues
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
 Maintainer: Jeffrey O Hanson <jeffrey.hanson@uqconnect.edu.au>
-SystemRequirements: Java (>= 1.8.0)
+SystemRequirements: java (>= 1.8.0),
+    scala (2.11.8)
 Collate:
     'internal.R'
     'gt_RasterLayer.R'
@@ -45,3 +43,4 @@ Collate:
     'gt_writeRaster.R'
     'gt_zonal.R'
     'zzz.R'
+RoxygenNote: 5.0.1

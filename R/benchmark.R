@@ -35,7 +35,10 @@ benchmark <- function(ncell=c(100, 2500, 1e+6), times = 100L, io=TRUE, gp=TRUE, 
     assertthat::is.flag(io),
     assertthat::is.flag(gp),
     assertthat::is.flag(stats),
-    io || gp || stats)    
+    io || gp || stats)
+  # check if microbenchmark installed
+  if(!'microbenchmark' %in% utils::installed.packages()[,1])
+    stop('the microbenchmark package is not installed')
   # simulate data
   raster_data <- lapply(ncell, function(x) {
     .random.raster(x, crs=sp::CRS('+init=epsg:4326'), xmn=-170, xmx=170, ymn=-80, ymx=80)
@@ -125,9 +128,15 @@ benchmark <- function(ncell=c(100, 2500, 1e+6), times = 100L, io=TRUE, gp=TRUE, 
 #' 
 #' This function plots an object.
 #' @param x input object.
+#' @param ... not used.
 #' @return \code{\link{ggplot2}{ggplot2}} object.
+#' @name plot
+#' @docType methods
+NULL
+
+#' @method plot gt_Benchmark
 #' @export
-plot.gt_Benchmark <- function(x) {
+plot.gt_Benchmark <- function(x, ...) {
   # init
   assertthat::assert_that(inherits(x, 'gt_Benchmark'))
   extract_data <- function(x, ncell, type) {
@@ -151,8 +160,8 @@ plot.gt_Benchmark <- function(x) {
   benchmark_data <- do.call(rbind, benchmark_data)
   # create plot
   ggplot2::ggplot(data=benchmark_data,
-                       mapping=ggplot2::aes(x=ncell, y=run_time, 
-                                            color=Operation)) +
+                       mapping=ggplot2::aes_string(x='ncell', y='run_time', 
+                                            color='Operation')) +
   ggplot2::geom_line() +
   ggplot2::geom_point() +
   ggplot2::xlab('Number of cells') + 
@@ -164,9 +173,15 @@ plot.gt_Benchmark <- function(x) {
 #' 
 #' This function prints an object.
 #' @param x input object.
+#' @param ... not used.
 #' @return None. It is used for the side-effect of printing a message.
+#' @name print
+#' @docType methods
+NULL
+
+#' @method print gt_Benchmark
 #' @export
-print.gt_Benchmark <- function(x) {
+print.gt_Benchmark <- function(x, ...) {
   assertthat::assert_that(inherits(x, 'gt_Benchmark'))
   message(paste0(
   'class: gt_Benchmark object

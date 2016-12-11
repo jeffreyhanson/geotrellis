@@ -21,6 +21,7 @@
 #' @export
 setGeneric('gt_zonal', function(x, z) {standardGeneric('gt_zonal')})
 
+#' @rdname gt_zonal
 #' @export
 setMethod('gt_zonal', signature(x='gt_RasterLayer', z='gt_RasterLayer'),
   function(x, z) {

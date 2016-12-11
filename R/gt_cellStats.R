@@ -20,6 +20,7 @@ NULL
 #' @export
 setGeneric('gt_cellStats', function(x) {standardGeneric('gt_cellStats')})
 
+#' @rdname gt_cellStats
 #' @export
 setMethod('gt_cellStats', signature(x='gt_RasterLayer'),
   function(x) {
