@@ -90,6 +90,7 @@ setOldClass('gt_RasterLayer')
 #' @seealso \code{\link{gt_RasterLayer-methods}}.
 NULL
 
+#' @importFrom R6 R6Class
 #' @export
 gt_RasterLayer <- R6::R6Class('gt_RasterLayer', 
   public = list(
