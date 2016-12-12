@@ -38,7 +38,7 @@ r_packages:
 
 before_install: 
   - echo "TRAVIS_OS_NAME = $TRAVIS_OS_NAME"
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-add-repository ppa:webupd8team/java; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-add-repository ppa:webupd8team/java -y; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo wget http://scala-lang.org/files/archive/scala-2.11.8.deb; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo dpkg -i scala-2.11.8.deb; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi;
