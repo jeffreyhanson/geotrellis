@@ -139,24 +139,24 @@ data source : Scala interpreter\n'))
     
     ## data management methods
     read_data = function(path) {
-      self$data <<- get('.read_data', asNamespace('geotrellis'))(path, as.reference=TRUE)
+      self$data <<- get('.read_data', .pkgenv)(path, as.reference=TRUE)
     },
     delete_data = function() {
       self$data <- NULL
     },
     write_data = function(path) {
-      invisible(get('.write_data', asNamespace('geotrellis'))(self$data, path))
+      invisible(get('.write_data', .pkgenv)(self$data, path))
     },
     read_metadata = function() {
       # retreive variables from Scala interpreter
-      self$no_data_value <<- get('.read_metadata_no_data_value', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
-      self$crs <<- sp::CRS(get('.read_metadata_crs', asNamespace('geotrellis'))(self$data, as.reference=FALSE))
-      self$extent <<- raster::extent(get('.read_metadata_extent', asNamespace('geotrellis'))(self$data, as.reference=FALSE))
-      self$ncell <<- get('.read_metadata_ncell', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
-      self$nrow <<- get('.read_metadata_nrow', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
-      self$ncol <<- get('.read_metadata_ncol', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
-      self$res <<- get('.read_metadata_res', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
-      self$data_type <<- get('.read_metadata_data_type', asNamespace('geotrellis'))(self$data, as.reference=NA)
+      self$no_data_value <<- get('.read_metadata_no_data_value', .pkgenv)(self$data, as.reference=FALSE)
+      self$crs <<- sp::CRS(get('.read_metadata_crs', .pkgenv)(self$data, as.reference=FALSE))
+      self$extent <<- raster::extent(get('.read_metadata_extent', .pkgenv)(self$data, as.reference=FALSE))
+      self$ncell <<- get('.read_metadata_ncell', .pkgenv)(self$data, as.reference=FALSE)
+      self$nrow <<- get('.read_metadata_nrow', .pkgenv)(self$data, as.reference=FALSE)
+      self$ncol <<- get('.read_metadata_ncol', .pkgenv)(self$data, as.reference=FALSE)
+      self$res <<- get('.read_metadata_res', .pkgenv)(self$data, as.reference=FALSE)
+      self$data_type <<- get('.read_metadata_data_type', .pkgenv)(self$data, as.reference=NA)
       if (!is.numeric(self$no_data_value)) 
         self$no_data_value <- NA_real_
       # check that retreived values are valid
@@ -177,9 +177,9 @@ data source : Scala interpreter\n'))
     ## data access methods
     values = function() {
       if (grepl('^Double.*$', self$data_type) || grepl('^Float.*$', self$data_type)) {
-        r <- get('.values_double', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+        r <- get('.values_double', .pkgenv)(self$data, as.reference=FALSE)
       } else {
-        r <- get('.values_integer', asNamespace('geotrellis'))(self$data, as.reference=FALSE)
+        r <- get('.values_integer', .pkgenv)(self$data, as.reference=FALSE)
       }
       r <- replace(r, r == self$no_data_value, NA)
       r
@@ -210,32 +210,32 @@ data source : Scala interpreter\n'))
     project_to_crs = function(to, res, method) {
       to <- .parse.CRS(to)
       if (is.numeric(to)) {
-        r <- gt_RasterLayer$new(get('.project_to_epsg_crs', asNamespace('geotrellis'))(self$data, to, res, method, as.reference=TRUE))
+        r <- gt_RasterLayer$new(get('.project_to_epsg_crs', .pkgenv)(self$data, to, res, method, as.reference=TRUE))
       } else {
-        r <- gt_RasterLayer$new(get('.project_to_unnamed_crs', asNamespace('geotrellis'))(self$data, to, res, method, as.reference=TRUE))
+        r <- gt_RasterLayer$new(get('.project_to_unnamed_crs', .pkgenv)(self$data, to, res, method, as.reference=TRUE))
       }
       r
     },
     project_to_raster = function(to, method) {
-      gt_RasterLayer$new(get('.project_to_raster', asNamespace('geotrellis'))(self$data, to$data, method, as.reference=TRUE))
+      gt_RasterLayer$new(get('.project_to_raster', .pkgenv)(self$data, to$data, method, as.reference=TRUE))
     },
     resample = function(y, method) {
-      gt_RasterLayer$new(get('.resample', asNamespace('geotrellis'))(self$data, y$data, method, as.reference=TRUE))
+      gt_RasterLayer$new(get('.resample', .pkgenv)(self$data, y$data, method, as.reference=TRUE))
     }, 
     mask = function(y, maskvalue, updatevalue) {
-      gt_RasterLayer$new(get('.mask', asNamespace('geotrellis'))(self$data, y$data, maskvalue, updatevalue, as.reference=TRUE))
+      gt_RasterLayer$new(get('.mask', .pkgenv)(self$data, y$data, maskvalue, updatevalue, as.reference=TRUE))
     },
     crop = function(extent) {
-      gt_RasterLayer$new(get('.crop', asNamespace('geotrellis'))(self$data, extent@xmin, extent@xmax, extent@ymin, extent@ymax, as.reference=TRUE))
+      gt_RasterLayer$new(get('.crop', .pkgenv)(self$data, extent@xmin, extent@xmax, extent@ymin, extent@ymax, as.reference=TRUE))
     },
   
     ### statistics methods
     cellStats = function() {
-      structure(get('.cellStats', asNamespace('geotrellis'))(self$data, as.reference=FALSE),
+      structure(get('.cellStats', .pkgenv)(self$data, as.reference=FALSE),
                 names=c('mean', 'median', 'mode', 'sd', 'min', 'max'))
     },
     zonal = function(y) {
-      r <- as.data.frame(get('.zonal', asNamespace('geotrellis'))(self$data, y$data, as.reference=FALSE))
+      r <- as.data.frame(get('.zonal', .pkgenv)(self$data, y$data, as.reference=FALSE))
       names(r) <- c('zone', 'mean', 'median', 'mode', 'sd')
       r <- r[is.finite(r[[1]]),]
       r <- r[order(r[[1]]),]
