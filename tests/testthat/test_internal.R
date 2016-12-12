@@ -37,3 +37,7 @@ test_that('.random.raster (number generation)', {
   expect_equal(raster::values(r), raster::values(r2), raster::values(r3))
   expect_true(raster::compareRaster(r, r2, r3, stopiffalse=FALSE))
 })
+
+test_that('.random.raster (errors)', {
+  expect_error(.random.raster(3, crs=sp::CRS('+init=epsg:4326'), xmn=-180, xmx=180, ymn=-90, ymx=90))
+})
