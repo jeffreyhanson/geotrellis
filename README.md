@@ -1,12 +1,11 @@
 [![Project Status: Concept - Minimal or no implementation has been done yet.](http://www.repostatus.org/badges/latest/concept.svg)](http://www.repostatus.org/#concept)
-[![Travis Build Status](https://img.shields.io/travis/jeffreyhanson/geotrellis/master.svg?label=Mac%20OSX%20%26%20Linux)](https://travis-ci.org/jeffreyhanson/geotrellis)
-[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/jeffreyhanson/geotrellis/master.svg?label=Windows)](https://ci.appveyor.com/project/jeffreyhanson/geotrellis)
+[![Travis Build Status](https://img.shields.io/travis/jeffreyhanson/geotrellis/master.svg?label=Linux)](https://travis-ci.org/jeffreyhanson/geotrellis)
 [![Coverage Status](https://codecov.io/github/jeffreyhanson/geotrellis/coverage.svg?branch=master)](https://codecov.io/github/jeffreyhanson/geotrellis?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/geotrellis)](https://CRAN.R-project.org/package=geotrellis)
 
 # Leverage [geotrellis](http://geotrellis.io) to read, write, manipulate, and analyze spatial data from within [R](https://cran.r-project.org).
 
-This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **Generally, this package seems to be slower than the (raster package)[https://CRAN.R-project.org/package=raster]. Additionally, I would not recommend this package for any real analysis.** 
+This package was developed as a proof of concept to determine if [geotrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **Generally, this package seems to be slower than the [raster package](https://CRAN.R-project.org/package=raster). Additionally, I would not recommend this package for any real analysis.** 
 
 ![Benchmark comparing functions from the "geotrellis" and "raster" R packages.](inst/vign/readme-figure/unnamed-chunk-1-1.png)
 

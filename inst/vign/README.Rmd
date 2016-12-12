@@ -10,9 +10,9 @@ output: github_document
 
 # Leverage [geotrellis](http://geotrellis.io) to read, write, manipulate, and analyze spatial data from within [R](https://cran.r-project.org).
 
-This package was developed as a proof of concept to determine if [goetrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **Generally, this package seems to be slower than the (raster package)[https://CRAN.R-project.org/package=raster]. Additionally, I would not recommend this package for any real analysis.** 
+This package was developed as a proof of concept to determine if [geotrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **Generally, this package seems to be slower than the [raster package](https://CRAN.R-project.org/package=raster). Additionally, I would not recommend this package for any real analysis.** 
 
-```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.', echo = FALSE, message=FALSE, results='hide', fig.width=8, fig.height=5.5}
+```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.', echo = FALSE, message=FALSE, results='hide', dpi=150, fig.width=8, fig.height=5.5}
 devtools::load_all()
 p <- plot(benchmark(ncell=c(1e+1, 1e+2, 1e+3, 1e+4, 1e+5), times=10L)) +
   ggplot2::theme(axis.title.x=ggplot2::element_text(size=12),

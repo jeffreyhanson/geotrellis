@@ -85,7 +85,15 @@
 object to a new coordinate system. This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/projectRaster'>projectRaster</a></code>.</p>
     
 
-    <pre><span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>res</span>, <span class='no'>method</span>)</pre>
+    <pre><span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>res</span>, <span class='no'>method</span>)
+
+<span class='co'># S4 method for gt_RasterLayer,CRS</span>
+<span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>res</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"bilinear"</span>, <span class='st'>"ngb"</span>))
+
+<span class='co'># S4 method for gt_RasterLayer,gt_RasterLayer</span>
+<span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>,
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"bilinear"</span>, <span class='st'>"ngb"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">

@@ -40,19 +40,167 @@
     <div class="page-header toc-ignore">
       <h1>geotrellis: spatial data analysis using geotrellis</h1>
             
-            <h4 class="date">10 December 2016</h4>
+            <h4 class="date">12 December 2016</h4>
           </div>
 
     
     
 <div class="contents">
-<p>This is is the real vignette.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span>)</code></pre></div>
-<p><img src="geotrellis_files/figure-html/unnamed-chunk-1-1.png" width="672"></p>
+<p>The <em>geotrellis</em> <em>R</em> package was an experiment to see if <em>R</em> could leverage the <a href="https://www.scala-lang.org"><em>Scala</em></a> <a href="http://geotrellis.io">data processing engine <em>geotrellis</em></a> to process spatial data faster than the <a href="https://cran.r-project.org/package=raster"><em>raster</em></a> <em>R</em> package. This vignette outlines the functions implmented in the geotrellis <em>R</em> package, and provides some benchmark results against the <em>raster</em> <em>R</em> package. <strong>This <em>R</em> package is experimental and not recomended for real analysis. Current benchmarks indicate that little to no benefits will be gained using this package.</strong></p>
+<p>Spatial data is stored in a <code>gt_RasterLayer</code> object. This <em>R6</em> class contains all low-level the definitions for reading, writing, processing, and analyzing data. However, users should not interact with this class&rsquo; methods directly. Instead, users should use the <em>S4</em> methods provided. The usage of these <em>S4</em> methods is outlined below.</p>
+<div id="readingwrite-data" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#readingwrite-data" class="anchor"> </a></body></html>Reading/write data</h1>
+<p>Spatial data is read using the <code>gt_raster</code> method. This method can load data using a <code>character</code> file path for a GeoTiff file. Additionally, users can coerce a <code>raster::RasterLayer-class</code> object. Note that the package only support single-band layer raster data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load in data using file path</span>
+g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster.html">gt_raster</a></span>(<span class="kw">system.file</span>(<span class="st">'extdata/test.tif'</span>, <span class="dt">package=</span><span class="st">'geotrellis'</span>))
+
+<span class="co"># load in data using a RasterLayer object</span>
+g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster.html">gt_raster</a></span>(<span class="kw">raster</span>(<span class="kw">system.file</span>(<span class="st">'extdata/test.tif'</span>, <span class="dt">package=</span><span class="st">'geotrellis'</span>)))</code></pre></div>
+<p>Once data has been loaded into <em>R</em>, users can access the metadata associated with the data. The methods used to access the metadata follow the conventions used in the <em>raster R</em> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/print.html">print</a></span>(g)  <span class="co"># print summary of object</span></code></pre></div>
+<pre><code>## class       : gt_RasterLayer
+## dimensions  : 3, 3, 6 (nrow, ncol, ncell)
+## resolution  : 1, 4 (x, y)
+## extent      : 0, 3, 2, 10 (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
+## data type   : float64ud-1.7E308
+## data source : Scala interpreter</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">crs</span>(g)    <span class="co"># coordinate reference system</span></code></pre></div>
+<pre><code>## CRS arguments:
+##  +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">extent</span>(g) <span class="co"># spatial extent of data</span></code></pre></div>
+<pre><code>## class       : Extent 
+## xmin        : 0 
+## xmax        : 3 
+## ymin        : 2 
+## ymax        : 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">res</span>(g)    <span class="co"># resolution</span></code></pre></div>
+<pre><code>## [1] 1 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncell</span>(g)  <span class="co"># number of data cells</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(g)   <span class="co"># number of columns</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(g)   <span class="co"># number of rows</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Users can also convert the data into native <em>R</em> objects and <code>raster::RasterLayer-class</code> objects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">values</span>(g)    <span class="co"># convert data as a numeric vector</span></code></pre></div>
+<pre><code>## [1] NA  0  0  0  0  0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.matrix</span>(g) <span class="co"># convert data to a matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   NA    0    0
+## [2,]    0    0    0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.raster</span>(g) <span class="co"># convert data to a RasterLayer</span></code></pre></div>
+<pre><code>## class       : RasterLayer 
+## dimensions  : 2, 3, 6  (nrow, ncol, ncell)
+## resolution  : 1, 4  (x, y)
+## extent      : 0, 3, 2, 10  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## data source : in memory
+## names       : layer 
+## values      : 0, 0  (min, max)</code></pre>
+<p>Finally, data can be saved to disk using the <code>gt_writeRaster</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># save data to disk in a GeoTiff format</span>
+<span class="kw"><a href="../reference/gt_writeRaster.html">gt_writeRaster</a></span>(g, <span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">'.tif'</span>)) </code></pre></div>
+</div>
+<div id="geoprocessing" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#geoprocessing" class="anchor"> </a></body></html>Geoprocessing</h1>
+<p>The <em>geotrellis R</em> package contains several geoprocessing methods.</p>
+<ul><li>To spatially align data in the same coordinate reference system, the <code>gt_resample</code> can be used:</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create new layer with different spatial resolution</span>
+l &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster.html">gt_raster</a></span>(raster::<span class="kw">disaggregate</span>(<span class="kw">as.raster</span>(g), <span class="dv">2</span>, <span class="dt">method=</span><span class="st">''</span>))
+
+<span class="co"># resample data to new resolution</span>
+<span class="kw"><a href="../reference/gt_resample.html">gt_resample</a></span>(g, l, <span class="dt">method=</span><span class="st">'ngb'</span>)</code></pre></div>
+<pre><code>## class       : gt_RasterLayer
+## dimensions  : 6, 6, 24 (nrow, ncol, ncell)
+## resolution  : 0.5, 2 (x, y)
+## extent      : 0, 3, 2, 10 (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
+## data type   : float64ud-1.7E308
+## data source : Scala interpreter</code></pre>
+<ul><li>To spatially project data to a different coordinate reference system, the <code>gt_projectRaster</code> method can be used. In addition to an input <code>gt_RasterLayer</code> object, this method accepts either: (1) a <code>sp::CRS</code> coordinate refence system object and a <code>numeric</code> resolution or (2) a <code>gt_RasterLayer</code> with spatial properties that are used to reproject the data.</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gt_projectRaster.html">gt_projectRaster</a></span>(g, sp::<span class="kw">CRS</span>(<span class="st">'+init=epsg:3395'</span>), <span class="dt">res=</span><span class="dv">50000</span>, <span class="dt">method=</span><span class="st">'ngb'</span>)</code></pre></div>
+<pre><code>## class       : gt_RasterLayer
+## dimensions  : 7, 7, 126 (nrow, ncol, ncell)
+## resolution  : 50000, 50000 (x, y)
+## extent      : 0, 350000, 211475.102852, 1111475.102852 (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0
+## data type   : float64ud-1.7E308
+## data source : Scala interpreter</code></pre>
+<ul><li>To extract contiguous chunk from a <code>gt_RasterLayer</code> object, the <code>gt_crop</code> method can be used. This method accepts either an <code>raster::Extent-class</code> object or a <code>gt_RasterLayer</code> object.</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gt_crop.html">gt_crop</a></span>(g, <span class="kw">extent</span>(raster::<span class="kw">extent</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>))))</code></pre></div>
+<pre><code>## class       : gt_RasterLayer
+## dimensions  : 3, 3, 3 (nrow, ncol, ncell)
+## resolution  : 1, 4 (x, y)
+## extent      : 0, 3, 2, 6 (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
+## data type   : float64ud-1.7E308
+## data source : Scala interpreter</code></pre>
+<ul><li>To set cells in in a <code>gt_RasterLayer</code> object to another value, the <code>gt_mask</code> method can be used. This defaults to updating cells in the argument to <code>x</code> to be <code>NA</code> where they are <code>NA</code> in the mask layer. The <code>maskvalue</code> and <code>updatevalue</code> arguments can used to modify this behavior though.</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create mask layer</span>
+m &lt;-<span class="st"> </span><span class="kw">as.raster</span>(g)
+m &lt;-<span class="st"> </span>raster::<span class="kw">setValues</span>(m, <span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="ot">NA</span>), <span class="kw">ncell</span>(m), <span class="dt">replace=</span><span class="ot">TRUE</span>))
+m &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster.html">gt_raster</a></span>(m)
+
+<span class="co"># run mask analysis</span>
+<span class="kw"><a href="../reference/gt_mask.html">gt_mask</a></span>(g, m)</code></pre></div>
+<pre><code>## class       : gt_RasterLayer
+## dimensions  : 3, 3, 6 (nrow, ncol, ncell)
+## resolution  : 1, 4 (x, y)
+## extent      : 0, 3, 2, 10 (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
+## data type   : float64ud-1.7E308
+## data source : Scala interpreter</code></pre>
+</div>
+<div id="statistics" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#statistics" class="anchor"> </a></body></html>Statistics</h1>
+<p>This package offers two statistical methods for analyzing data in a <code>gt_RasterLayer</code> object. Note that there is currently a bug in the geotrellis code that causes medians to be calculated incorrectly. Additionally, note that unlike the functions in the <em>raster R</em> package, these functions calculate the population standard deviation, not the sample standard deviation.</p>
+<p>The <code>gt_cellStats</code> method can be used to calculate statistics using all the cells in the raster data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gt_cellStats.html">gt_cellStats</a></span>(g)</code></pre></div>
+<pre><code>##       mean     median       mode         sd        min        max 
+## 0.56479571 0.46143892 0.99364547 0.35762296 0.09470918 0.99364547</code></pre>
+<p>The the <code>gt_zonal</code> method can be used to calculate statistics in zones, as specified in a second raster.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make layer with zones</span>
+z &lt;-<span class="st"> </span><span class="kw">as.raster</span>(g)
+z &lt;-<span class="st"> </span>raster::<span class="kw">setValues</span>(z, <span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">2</span>, <span class="kw">ncell</span>(z), <span class="dt">replace=</span><span class="ot">TRUE</span>))
+z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster.html">gt_raster</a></span>(z)
+
+<span class="co"># run zonal statistics</span>
+<span class="kw"><a href="../reference/gt_zonal.html">gt_zonal</a></span>(g, z)</code></pre></div>
+<pre><code>##   zone       mean      median mode        sd
+## 1    1 -429496730 -1342177280    0 858993459
+## 2    2          0           0    0         0</code></pre>
+</div>
+<div id="benchmarks" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#benchmarks" class="anchor"> </a></body></html>Benchmarks</h1>
+<p>Finally, the <em>geotrellis R</em> package provides a <code>benchmark</code> function to automate the benchmarking of all these functions and compare them to their counterparts in the <em>raster</em> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run benchmark</span>
+b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/benchmark.html">benchmark</a></span>(<span class="dt">ncell=</span><span class="kw">c</span>(<span class="fl">1e+1</span>, <span class="fl">1e+2</span>, <span class="fl">1e+3</span>, <span class="fl">1e+4</span>, <span class="fl">1e+5</span>), <span class="dt">times=</span>10L)
+<span class="co"># print benchmark</span>
+<span class="kw"><a href="../reference/print.html">print</a></span>(b)</code></pre></div>
+<pre><code>## class: gt_Benchmark object
+##   ncell: 10, 100, 1000, 10000, 1e+05
+##   tests: input/output, geoprocessing, statistics</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot benchmark</span>
+<span class="kw"><a href="../reference/plot.html">plot</a></span>(b)</code></pre></div>
+<p><img src="geotrellis_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+</div>
+<div id="acknowledgments" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#acknowledgments" class="anchor"> </a></body></html>Acknowledgments</h1>
+<p>I would like to thank to the <em>geotrellis</em> developers for their assistance.</p>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked"><li><a href="#readingwrite-data">Reading/write data</a></li>
+      <li><a href="#geoprocessing">Geoprocessing</a></li>
+      <li><a href="#statistics">Statistics</a></li>
+      <li><a href="#benchmarks">Benchmarks</a></li>
+      <li><a href="#acknowledgments">Acknowledgments</a></li>
+      </ul></div>
       </div>
 
 </div>
