@@ -39,7 +39,7 @@ devtools:::install_github('jeffreyhanson/geotrellis')
 
 Once this package has been installed, you can read through the vignette for a tutorial on how to use it.
 
-[View it here](https://rawgit.com/geotrellis/geotrellis/master/inst/doc/geotrellis.html), or by running this R code:
+[View it here](https://cdn.rawgit.com/jeffreyhanson/geotrellis/master/inst/doc/geotrellis.html), or by running this code in R:
 
 ```
 vignette('geotrellis', package='geotrellis')
