@@ -46,7 +46,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install oracle-java8-installer; fi;
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install sudo apt-get install oracle-java8-set-default; fi;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install oracle-java8-set-default; fi;
   
   
   
