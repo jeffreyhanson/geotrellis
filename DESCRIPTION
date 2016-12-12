@@ -13,6 +13,7 @@ Imports:
     assertthat
 Suggests:
     microbenchmark,
+    rgdal,
     testthat,
     knitr
 Depends:

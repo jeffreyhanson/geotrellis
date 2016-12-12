@@ -1,6 +1,7 @@
 language: r
 dist: trusty
 sudo: true
+r_check_args: --no-codoc
   
 r:
   - release
@@ -13,7 +14,6 @@ env:
   global:
     - R_LIBS="http://cran.rstudio.com"
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
-    - R_CHECK_ARGS="--no-codoc"
 
 warnings_are_errors: true
 
@@ -47,8 +47,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install oracle-java8-installer; fi;
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install oracle-java8-set-default; fi;
-  
-  
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then rm -f scala-2.11.8.deb; fi;
   
 after_success:
   - Rscript -e 'covr::codecov()'
