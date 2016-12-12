@@ -46,10 +46,10 @@
     
     
 <div class="contents">
-<p>The <em>geotrellis</em> <em>R</em> package was an experiment to see if <em>R</em> could leverage the <a href="https://www.scala-lang.org"><em>Scala</em></a> <a href="http://geotrellis.io">data processing engine <em>geotrellis</em></a> to process spatial data faster than the <a href="https://cran.r-project.org/package=raster"><em>raster</em></a> <em>R</em> package. This vignette outlines the functions implmented in the geotrellis <em>R</em> package, and provides some benchmark results against the <em>raster</em> <em>R</em> package. <strong>This <em>R</em> package is experimental and not recomended for real analysis. Current benchmarks indicate that little to no benefits will be gained using this package.</strong></p>
+<p>The <em>geotrellis</em> <em>R</em> package was an experiment to see if <em>R</em> could leverage the <a href="https://www.scala-lang.org"><em>Scala</em></a> <a href="http://geotrellis.io">data processing engine <em>geotrellis</em></a> to process spatial data faster than the <a href="https://cran.r-project.org/package=raster"><em>raster</em></a> <em>R</em> package. This vignette outlines the functions implemented in the geotrellis <em>R</em> package, and provides some benchmark results against the <em>raster</em> <em>R</em> package. <strong>This <em>R</em> package is experimental and not recommended for real analysis. Current benchmarks indicate that little to no benefits will be gained using this package.</strong></p>
 <p>Spatial data is stored in a <code>gt_RasterLayer</code> object. This <em>R6</em> class contains all low-level the definitions for reading, writing, processing, and analyzing data. However, users should not interact with this class&rsquo; methods directly. Instead, users should use the <em>S4</em> methods provided. The usage of these <em>S4</em> methods is outlined below.</p>
-<div id="readingwrite-data" class="section level1">
-<h1 class="hasAnchor"><html><body><a href="#readingwrite-data" class="anchor"> </a></body></html>Reading/write data</h1>
+<div id="readingwriting-data" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#readingwriting-data" class="anchor"> </a></body></html>Reading/writing data</h1>
 <p>Spatial data is read using the <code>gt_raster</code> method. This method can load data using a <code>character</code> file path for a GeoTiff file. Additionally, users can coerce a <code>raster::RasterLayer-class</code> object. Note that the package only support single-band layer raster data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load in data using file path</span>
 g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster.html">gt_raster</a></span>(<span class="kw">system.file</span>(<span class="st">'extdata/test.tif'</span>, <span class="dt">package=</span><span class="st">'geotrellis'</span>))
@@ -195,7 +195,7 @@ b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/benchmark
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
       <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked"><li><a href="#readingwrite-data">Reading/write data</a></li>
+      <ul class="nav nav-pills nav-stacked"><li><a href="#readingwriting-data">Reading/writing data</a></li>
       <li><a href="#geoprocessing">Geoprocessing</a></li>
       <li><a href="#statistics">Statistics</a></li>
       <li><a href="#benchmarks">Benchmarks</a></li>

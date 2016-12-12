@@ -17,11 +17,11 @@ vignette: >
 devtools::load_all()
 ```
 
-The _geotrellis_ _R_ package was an experiment to see if _R_ could leverage the [_Scala_](https://www.scala-lang.org) [data processing engine _geotrellis_](http://geotrellis.io) to process spatial data faster than the [_raster_](https://cran.r-project.org/package=raster) _R_ package. This vignette outlines the functions implmented in the geotrellis _R_ package, and provides some benchmark results against the _raster_ _R_ package. **This _R_ package is experimental and not recomended for real analysis. Current benchmarks indicate that little to no benefits will be gained using this package.**
+The _geotrellis_ _R_ package was an experiment to see if _R_ could leverage the [_Scala_](https://www.scala-lang.org) [data processing engine _geotrellis_](http://geotrellis.io) to process spatial data faster than the [_raster_](https://cran.r-project.org/package=raster) _R_ package. This vignette outlines the functions implemented in the geotrellis _R_ package, and provides some benchmark results against the _raster_ _R_ package. **This _R_ package is experimental and not recommended for real analysis. Current benchmarks indicate that little to no benefits will be gained using this package.**
 
 Spatial data is stored in a `gt_RasterLayer` object. This _R6_ class contains all low-level the definitions for reading, writing, processing, and analyzing data. However, users should not interact with this class' methods directly. Instead, users should use the _S4_ methods provided. The usage of these _S4_ methods is outlined below. 
 
-# Reading/write data
+# Reading/writing data
 
 Spatial data is read using the `gt_raster` method. This method can load data using a `character` file path for a GeoTiff file. Additionally, users can coerce a `raster::RasterLayer-class` object. Note that the package only support single-band layer raster data. 
 
