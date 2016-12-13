@@ -62,11 +62,11 @@
   if (raster::canProcessInMemory(x, 3) & (!isTRUE(toDisk) || is.null(NULL))) {
     w <- raster::setValues(x, fun(n=ncell(x)))
   } else {
-    f <- raster::rasterTmpFile()
-    w <- raster::writeStart(x, f)
+    f <- file.path(tempdir(), basename(raster::rasterTmpFile()))
     bs <- raster::blockSize(x)
+    w <- raster::writeStart(x, f)
     for (i in seq_len(bs$n)) {
-      w <- writeValues(w, fun(n=ncol(x) * bs$nrows[i]), bs$row[i])
+      w <- raster::writeValues(w, fun(n=ncol(x) * bs$nrows[i]), bs$row[i])
     }
     w <- raster::writeStop(w)
   }

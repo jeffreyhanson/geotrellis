@@ -13,8 +13,9 @@ output: github_document
 This package was developed as a proof of concept to determine if [geotrellis](http://geotrellis.io) could be leveraged to provide greater performance for processing spatial data sets. **Generally, this package seems to be comparable to the [raster package](https://CRAN.R-project.org/package=raster), but there is little to no benefit in most cases. I would not recommend this package for any real analysis.** 
 
 ```{r, fig.cap='Benchmark comparing functions from the "geotrellis" and "raster" R packages.', echo = FALSE, message=FALSE, results='hide', dpi=150, fig.width=8, fig.height=5.5}
+options(rscala.heap.maximum='8g')
 devtools::load_all()
-p <- plot(benchmark(ncell=c(1e+1, 1e+2, 1e+3, 1e+4, 1e+5), times=10L)) +
+p <- plot(benchmark(ncell=c(1e+1, 1e+2, 1e+3, 1e+4, 1e+5, 1e+6, 1e+7, 1e+8, 1e+9), times=10L, io=FALSE)) +
   ggplot2::theme(axis.title.x=ggplot2::element_text(size=12),
         axis.title.y=ggplot2::element_text(size=12),
         strip.text=ggplot2::element_text(size=15, color='white'),

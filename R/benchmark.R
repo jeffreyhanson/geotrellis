@@ -63,10 +63,8 @@ benchmark <- function(ncell=c(100, 2500, 1e+6), times = 100L, io=TRUE, gp=TRUE, 
         microbenchmark::microbenchmark(
           raster_read={raster(input.path)},
           raster_write={writeRaster(r, output.path, overwrite=TRUE)},
-          raster_values={values(r)},
           geotrellis_read={gt_raster(input.path)},
           geotrellis_write={gt_writeRaster(g, output.path, overwrite=TRUE)},
-          geotrellis_values={values(g)},
           times=times)})
     names(b[['input/output']]) <- as.character(ncell)
   }
