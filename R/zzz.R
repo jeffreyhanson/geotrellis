@@ -4,7 +4,7 @@
 .onAttach <- function(libname, pkgname) {
   # instantiate scala interpreter
   assign('s', envir=.pkgenv,
-    rscala::scala(classpath = system.file('java/geotrellis.jar', package='geotrellis'), stdout=FALSE, stderr=FALSE))
+    rscala::scala(classpath = system.file('java/geotrellis.jar', package='geotrellis'), stdout=TRUE, stderr=TRUE))
 
   # load scala dependencies
   rscala::scalaEval(get('s', .pkgenv), paste0('

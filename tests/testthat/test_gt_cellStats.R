@@ -14,6 +14,6 @@ test_that('gt_cellStats (x=gt_RasterLayer)', {
                      min, max),
                    cellStats, x=rst)
   # tests
-  expect_equal(unname(stats1)[-2], stats2[-2]) # do not compare medians since these are known to be incorrect
+  expect_equal(unname(stats1)[-2], stats2[-2]) # medians are known to be incorrect
 })
 

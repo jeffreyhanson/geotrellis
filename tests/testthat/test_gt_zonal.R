@@ -19,7 +19,7 @@ test_that('gt_zonal (x=gt_RasterLayer, y=gt_RasterLayer)', {
   # tests
   expect_equal(m[[1]][,1], m2$zone)
   expect_equal(m[[1]][,2], m2$mean) 
-  #expect_equal(m[[2]][,2], m2$median) # do not compare medians since these are known to be incorrect
+  expect_equal(m[[2]][,2], m2$median) # medians are incorrect on geotrellis
   expect_equal(m[[3]][,2], m2$mode)
   expect_equal(m[[4]][,2], m2$sd)
 })

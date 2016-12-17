@@ -122,6 +122,7 @@ gt_RasterLayer <- R6::R6Class('gt_RasterLayer',
     },
     finalize = function() {
       self$delete_data()
+      invisible()
     },
     
     ## print methods
@@ -177,7 +178,7 @@ data source : Scala interpreter\n'))
     
     ## data access methods
     values = function() {
-      if (grepl('^Double.*$', self$data_type) || grepl('^Float.*$', self$data_type)) {
+      if (grepl('^double.*$', self$data_type) || grepl('^float.*$', self$data_type)) {
         r <- get('.values_double', .pkgenv)(self$data, as.reference=FALSE)
       } else {
         r <- get('.values_integer', .pkgenv)(self$data, as.reference=FALSE)
