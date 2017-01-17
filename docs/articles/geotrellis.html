@@ -40,7 +40,7 @@
     <div class="page-header toc-ignore">
       <h1>geotrellis: spatial data analysis using geotrellis</h1>
             
-            <h4 class="date">12 December 2016</h4>
+            <h4 class="date">17 January 2017</h4>
           </div>
 
     
@@ -63,8 +63,7 @@ g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster
 ## resolution  : 1, 4 (x, y)
 ## extent      : 0, 3, 2, 10 (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
-## data type   : float64ud-1.7E308
-## data source : Scala interpreter</code></pre>
+## data type   : float64ud-1.7E308</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">crs</span>(g)    <span class="co"># coordinate reference system</span></code></pre></div>
 <pre><code>## CRS arguments:
 ##  +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0</code></pre>
@@ -84,11 +83,11 @@ g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster
 <pre><code>## [1] 2</code></pre>
 <p>Users can also convert the data into native <em>R</em> objects and <code>raster::RasterLayer-class</code> objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">values</span>(g)    <span class="co"># convert data as a numeric vector</span></code></pre></div>
-<pre><code>## [1] NA  0  0  0  0  0</code></pre>
+<pre><code>## [1]         NA 0.99364547 0.81274606 0.18600036 0.73687747 0.09470918</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.matrix</span>(g) <span class="co"># convert data to a matrix</span></code></pre></div>
-<pre><code>##      [,1] [,2] [,3]
-## [1,]   NA    0    0
-## [2,]    0    0    0</code></pre>
+<pre><code>##           [,1]      [,2]       [,3]
+## [1,]        NA 0.9936455 0.81274606
+## [2,] 0.1860004 0.7368775 0.09470918</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.raster</span>(g) <span class="co"># convert data to a RasterLayer</span></code></pre></div>
 <pre><code>## class       : RasterLayer 
 ## dimensions  : 2, 3, 6  (nrow, ncol, ncell)
@@ -97,7 +96,7 @@ g &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster
 ## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## data source : in memory
 ## names       : layer 
-## values      : 0, 0  (min, max)</code></pre>
+## values      : 0.09470918, 0.9936455  (min, max)</code></pre>
 <p>Finally, data can be saved to disk using the <code>gt_writeRaster</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># save data to disk in a GeoTiff format</span>
 <span class="kw"><a href="../reference/gt_writeRaster.html">gt_writeRaster</a></span>(g, <span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">'.tif'</span>)) </code></pre></div>
@@ -116,17 +115,15 @@ l &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster
 ## resolution  : 0.5, 2 (x, y)
 ## extent      : 0, 3, 2, 10 (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
-## data type   : float64ud-1.7E308
-## data source : Scala interpreter</code></pre>
+## data type   : float64ud-1.7E308</code></pre>
 <ul><li>To spatially project data to a different coordinate reference system, the <code>gt_projectRaster</code> method can be used. In addition to an input <code>gt_RasterLayer</code> object, this method accepts either: (1) a <code>sp::CRS</code> coordinate refence system object and a <code>numeric</code> resolution or (2) a <code>gt_RasterLayer</code> with spatial properties that are used to reproject the data.</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gt_projectRaster.html">gt_projectRaster</a></span>(g, sp::<span class="kw">CRS</span>(<span class="st">'+init=epsg:3395'</span>), <span class="dt">res=</span><span class="dv">50000</span>, <span class="dt">method=</span><span class="st">'ngb'</span>)</code></pre></div>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gt_aggregate,gt_RasterLayer-method.html">gt_projectRaster</a></span>(g, sp::<span class="kw">CRS</span>(<span class="st">'+init=epsg:3395'</span>), <span class="dt">res=</span><span class="dv">50000</span>, <span class="dt">method=</span><span class="st">'ngb'</span>)</code></pre></div>
 <pre><code>## class       : gt_RasterLayer
 ## dimensions  : 7, 7, 126 (nrow, ncol, ncell)
 ## resolution  : 50000, 50000 (x, y)
 ## extent      : 0, 350000, 211475.102852, 1111475.102852 (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0
-## data type   : float64ud-1.7E308
-## data source : Scala interpreter</code></pre>
+## data type   : float64ud-1.7E308</code></pre>
 <ul><li>To extract contiguous chunk from a <code>gt_RasterLayer</code> object, the <code>gt_crop</code> method can be used. This method accepts either an <code>raster::Extent-class</code> object or a <code>gt_RasterLayer</code> object.</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/gt_crop.html">gt_crop</a></span>(g, <span class="kw">extent</span>(raster::<span class="kw">extent</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>))))</code></pre></div>
 <pre><code>## class       : gt_RasterLayer
@@ -134,8 +131,7 @@ l &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster
 ## resolution  : 1, 4 (x, y)
 ## extent      : 0, 3, 2, 6 (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
-## data type   : float64ud-1.7E308
-## data source : Scala interpreter</code></pre>
+## data type   : float64ud-1.7E308</code></pre>
 <ul><li>To set cells in in a <code>gt_RasterLayer</code> object to another value, the <code>gt_mask</code> method can be used. This defaults to updating cells in the argument to <code>x</code> to be <code>NA</code> where they are <code>NA</code> in the mask layer. The <code>maskvalue</code> and <code>updatevalue</code> arguments can used to modify this behavior though.</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create mask layer</span>
 m &lt;-<span class="st"> </span><span class="kw">as.raster</span>(g)
@@ -149,8 +145,7 @@ m &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gt_raster
 ## resolution  : 1, 4 (x, y)
 ## extent      : 0, 3, 2, 10 (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
-## data type   : float64ud-1.7E308
-## data source : Scala interpreter</code></pre>
+## data type   : float64ud-1.7E308</code></pre>
 </div>
 <div id="statistics" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#statistics" class="anchor"> </a></body></html>Statistics</h1>

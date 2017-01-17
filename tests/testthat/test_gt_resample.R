@@ -1,4 +1,4 @@
- context('gt_resample')
+context('gt_resample')
 
 test_that('gt_resample (method=ngb)', {
   # init

@@ -1,4 +1,4 @@
-all: clean jar docs readme site vignettes check build
+all: clean jar docs readme site vigns check build
 
 clean:
 	rm -rf docs/*

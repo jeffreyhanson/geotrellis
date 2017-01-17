@@ -85,14 +85,18 @@ benchmark <- function(ncell=c(100, 2500, 1e+6), times = 100L, io=TRUE, gp=TRUE, 
         g_m <- gt_raster(r_m)
         # benchmark
         microbenchmark::microbenchmark(
-          raster_resample={resample(r, r_y)},
-          raster_reproject={suppressWarnings(projectRaster(r, crs=crs, res=res))},
-          raster_crop={crop(r, ext)},
-          raster_mask={mask(r, r_m)},
+          raster_resample={raster::resample(r, r_y)},
+          raster_reproject={suppressWarnings(raster::projectRaster(r, crs=crs, res=res))},
+          raster_crop={raster::crop(r, ext)},
+          raster_mask={raster::mask(r, r_m)},
+          raster_aggregate={suppressWarnings(raster::aggregate(r, 2, 'mean'))},
+          raster_disaggregate={suppressWarnings(raster::disaggregate(r, 2, ''))},
           geotrellis_resample={gt_resample(g, g_y)},
           geotrellis_reproject={gt_projectRaster(g, to=crs, res=res)},
           geotrellis_crop={gt_crop(g, ext)},
           geotrellis_mask={gt_mask(g, g_m)},
+          geotrellis_aggregate={gt_aggregate(g, 2, 'mean')},
+          geotrellis_disaggregate={gt_disaggregate(g, 2, 'ngb')},
           times=times)})
     names(b[['geoprocessing']]) <- as.character(ncell)
   }

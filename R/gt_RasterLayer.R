@@ -135,8 +135,7 @@ extent      : ', round(self$extent@xmin, 6), ', ', round(self$extent@xmax, 6), '
                  round(self$extent@ymin, 6), ', ', round(self$extent@ymax, 6), 
                  ' (xmin, xmax, ymin, ymax)
 coord. ref. : ', self$crs@projargs,'
-data type   : ',self$data_type,'
-data source : Scala interpreter\n'))
+data type   : ',self$data_type,'\n'))
     },
     
     ## data management methods
@@ -230,7 +229,12 @@ data source : Scala interpreter\n'))
     crop = function(extent) {
       gt_RasterLayer$new(get('.crop', .pkgenv)(self$data, extent@xmin, extent@xmax, extent@ymin, extent@ymax, as.reference=TRUE))
     },
-  
+    aggregate = function(fact, fun) {
+      gt_RasterLayer$new(get('.aggregate', .pkgenv)(self$data, as.double(fact[1]), as.double(fact[2]), fun, as.reference=TRUE))
+    }, 
+    disaggregate = function(fact, method) {
+      gt_RasterLayer$new(get('.disaggregate', .pkgenv)(self$data, as.double(fact[1]), as.double(fact[2]), method, as.reference=TRUE))
+    },
     ### statistics methods
     cellStats = function() {
       structure(get('.cellStats', .pkgenv)(self$data, as.reference=FALSE),

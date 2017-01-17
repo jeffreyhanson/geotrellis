@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Project geotrellis raster to a new coordinate system <U+2014> gt_projectRaster <e2><80><a2> geotrellis</title>
+<title>Project geotrellis raster to a new coordinate system <U+2014> gt_aggregate,gt_RasterLayer-method <e2><80><a2> geotrellis</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -85,7 +85,15 @@
 object to a new coordinate system. This function is similar to <code><a href='http://www.rdocumentation.org/packages/raster/topics/projectRaster'>projectRaster</a></code>.</p>
     
 
-    <pre><span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>res</span>, <span class='no'>method</span>)
+    <pre><span class='co'># S4 method for gt_RasterLayer</span>
+<span class='fu'><a href='gt_aggregate.html'>gt_aggregate</a></span>(<span class='no'>x</span>, <span class='no'>fact</span>, <span class='kw'>fun</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"mode"</span>,
+  <span class='st'>"median"</span>, <span class='st'>"max"</span>, <span class='st'>"min"</span>))
+
+<span class='co'># S4 method for gt_RasterLayer</span>
+<span class='fu'><a href='gt_disaggregate.html'>gt_disaggregate</a></span>(<span class='no'>x</span>, <span class='no'>fact</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ngb"</span>,
+  <span class='st'>"bilinear"</span>))
+
+<span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>res</span>, <span class='no'>method</span>)
 
 <span class='co'># S4 method for gt_RasterLayer,CRS</span>
 <span class='fu'>gt_projectRaster</span>(<span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>res</span>,
@@ -97,6 +105,10 @@ object to a new coordinate system. This function is similar to <code><a href='ht
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
+      <dt>method</dt>
+      <dd><code>character</code> method used to compute values for the new <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.
+Either &#39;ngb&#39; (nearest neighbor), which is useful for categorical variables, or &#39;bilinear&#39; 
+(bilinear interpolation; the default value), which is appropriate for continuous variables.</dd>
       <dt>from</dt>
       <dd><code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code> object.</dd>
       <dt>to</dt>
@@ -107,10 +119,6 @@ object to a new coordinate system. This function is similar to <code><a href='ht
       <dt>res</dt>
       <dd><code>numeric</code> resolution to reproject the data to. This is required when <code>to</code>
 is a <code><a href='http://www.rdocumentation.org/packages/sp/topics/CRS-class'>CRS</a></code> object.</dd>
-      <dt>method</dt>
-      <dd><code>character</code> method used to compute values for the new <code><a href='gt_RasterLayer.html'>gt_RasterLayer</a></code>.
-Either &#39;ngb&#39; (nearest neighbor), which is useful for categorical variables, or &#39;bilinear&#39; 
-(bilinear interpolation; the default value), which is appropriate for continuous variables.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>

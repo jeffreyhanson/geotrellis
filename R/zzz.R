@@ -100,6 +100,31 @@
   assign('.crop', envir=.pkgenv,
          rscala::scalaDef(get('s', .pkgenv), 'x:ProjectedRaster[Tile], xmin:Double, xmax:Double, ymin:Double, ymax:Double',
                          'ProjectedRaster(x.raster.crop(Extent(xmin=xmin,xmax=xmax,ymin=ymin,ymax=ymax)), x.crs)'))
+  assign('.aggregate', envir=.pkgenv,
+         rscala::scalaDef(get('s', .pkgenv), 'x:ProjectedRaster[Tile], fact_x:Double, fact_y:Double, fun:String',
+                         'val newRasterExtent=x.rasterExtent.withResolution(targetCellWidth=x.raster.cellSize.width*fact_x,
+                                                                        targetCellHeight=x.raster.cellSize.height*fact_y)
+                          if (fun=="mean") {
+                            ProjectedRaster(x.raster.resample(method=Average, target=newRasterExtent),x.crs)
+                          } else if (fun=="median"){
+                            ProjectedRaster(x.raster.resample(method=Median, target=newRasterExtent),x.crs)
+                          } else if (fun=="mode"){
+                            ProjectedRaster(x.raster.resample(method=Mode, target=newRasterExtent),x.crs)
+                          } else if (fun=="max"){
+                            ProjectedRaster(x.raster.resample(method=Max, target=newRasterExtent),x.crs)
+                          } else {
+                            ProjectedRaster(x.raster.resample(method=Min, target=newRasterExtent),x.crs)
+                          }
+                          '))
+  assign('.disaggregate', envir=.pkgenv,
+         rscala::scalaDef(get('s', .pkgenv), 'x:ProjectedRaster[Tile], fact_x:Double, fact_y:Double, method:String',
+                         'val newRasterExtent=x.rasterExtent.withResolution(targetCellWidth=x.raster.cellSize.width/fact_x,
+                                                                        targetCellHeight=x.raster.cellSize.height/fact_y)
+                         if (method=="ngb") {
+                            ProjectedRaster(x.raster.resample(method=NearestNeighbor, target=newRasterExtent),x.crs)
+                          } else {
+                            ProjectedRaster(x.raster.resample(method=Bilinear, target=newRasterExtent),x.crs)
+                          }'))
   assign('.cellStats', envir=.pkgenv,
          rscala::scalaDef(get('s', .pkgenv), 'x:ProjectedRaster[Tile]',
                          'var s = x.tile.statisticsDouble.get
