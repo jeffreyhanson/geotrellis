@@ -2,9 +2,14 @@
 .pkgenv <- new.env(parent=emptyenv())
 
 .onAttach <- function(libname, pkgname) {
+  # get amount of memory to use for java virtual machine
+  m <- options()$rscala.heap.maximum
+  if (is.null(m))
+    m <- .memory.size()
+
   # instantiate scala interpreter
   assign('s', envir=.pkgenv,
-    rscala::scala(classpath = system.file('java/geotrellis.jar', package='geotrellis'), stdout=TRUE, stderr=TRUE))
+    rscala::scala(classpath = system.file('java/geotrellis.jar', package='geotrellis'), stdout=TRUE, stderr=TRUE, heap.maximum=m))
 
   # load scala dependencies
   rscala::scalaEval(get('s', .pkgenv), paste0('
@@ -22,9 +27,14 @@
   
   # for reasons unknown...
   # the first scalaDef that uses geotrellis always results in an error
-  # so trigger this error and then moeve onto the real definitations
-  r <- utils::capture.output(try(rscala::scalaDef(get('s', .pkgenv),
-                                'x:geotrellis.raster.ProjectedRaster[geotrellis.raster.Tile]', 'x'), silent=TRUE))
+  # so trigger this error and then moeve onto the real definitations  
+  r <- try(rscala::scalaDef(get('s', .pkgenv),
+                                'x:ProjectedRaster[Tile]', 'x'), silent=TRUE)
+
+#   print(1)
+#   r <- try(.silent.scalaDef(get('s', .pkgenv),
+#                                 'x:ProjectedRaster[Tile]', 'x'), silent=TRUE)
+#   print(2)
   
   # create scala functions
   assign('.read_data', envir=.pkgenv,
