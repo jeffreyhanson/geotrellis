@@ -29,7 +29,7 @@ readme:
 	sed -i 1,5d README.md
 	sed -i 's|figure|inst/vign/readme-figure|g' README.md
 
-site: docs readme
+site:
 	mkdir -p vignettes
 	cp -f inst/vign/geotrellis.Rmd vignettes/geotrellis.Rmd
 	R --slave -e "devtools::load_all();pkgdown::build_site()"

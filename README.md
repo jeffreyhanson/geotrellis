@@ -44,3 +44,4 @@ Once this package has been installed, you can read through the vignette for a tu
 ```
 vignette('geotrellis', package='geotrellis')
 ```
+
